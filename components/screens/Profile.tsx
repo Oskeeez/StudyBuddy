@@ -72,6 +72,17 @@ export default function Profile() {
             ))}
           </div>
         </section>
+        <section>
+          <p className="lab">Canvas</p>
+          <div className="card set">
+            <button className="row" onClick={A.signOut}>
+              <span className="m">
+                <b>Connected to Canvas (demo)</b>
+                <span>Tap to disconnect and replay the sign-in.</span>
+              </span>
+            </button>
+          </div>
+        </section>
         <p className="note">No followers, no rankings. Study Buddy is about working together, not popularity.</p>
       </div>
     </div>

@@ -1,0 +1,60 @@
+/* ---------- connect flow: welcome, Canvas-inspired sign-in, allow, sync ---------- */
+.ob{flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto}
+
+/* welcome */
+.ob-welcome{padding:28px 24px max(28px,env(safe-area-inset-bottom));justify-content:space-between;text-align:center;align-items:center;gap:18px}
+.ob-welcome .mascot{width:200px;margin-top:8px;animation:bob 3.4s ease-in-out infinite}
+.ob-welcome h1{font-family:var(--font-d);font-weight:800;font-size:46px;line-height:.95;letter-spacing:-.035em}
+.ob-welcome .tag2{color:var(--muted);font-size:16px;max-width:28ch;margin:10px auto 0}
+.ob-steps{display:flex;flex-direction:column;gap:10px;width:100%;text-align:left}
+.ob-step{display:flex;gap:12px;align-items:center;background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:12px 14px;font-size:14px}
+.ob-step .n{width:28px;height:28px;border-radius:50%;background:var(--btn);color:#fff;display:grid;place-items:center;font-weight:900;font-size:13px;flex:none}
+.ob-cta{width:100%;display:flex;flex-direction:column;gap:10px;align-items:center}
+.btn.big{height:52px;font-size:16px;width:100%}
+.ob-note{font-size:12.5px;color:var(--muted);text-align:center}
+
+/* Canvas-inspired sign-in (fixed light colours, like an external login page) */
+.lms{flex:1;min-height:0;display:flex;flex-direction:column;background:#F5F5F5;color:#2D3B45;font-family:var(--font-b);overflow-y:auto}
+.lms-demo{background:#FFF0C2;color:#5E4300;font-size:12px;font-weight:700;padding:8px 14px;text-align:center;flex:none}
+.lms-hero{background:#E72429;color:#fff;padding:26px 24px 58px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;flex:none}
+.lms-hero .logo{width:58px;height:58px;border-radius:16px;background:rgba(255,255,255,.18);display:grid;place-items:center}
+.lms-hero .logo .ico{width:32px;height:32px}
+.lms-hero h2{font-size:20px;font-weight:900}
+.lms-hero p{font-size:13.5px;opacity:.9}
+.lms-card{background:#fff;border-radius:12px;margin:-38px 16px 24px;padding:20px 18px;box-shadow:0 4px 18px rgba(0,0,0,.12);display:flex;flex-direction:column;gap:14px}
+.lms-card h3{font-size:18px;font-weight:900}
+.lms label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700}
+.lms input[type=text],.lms input[type=password]{width:100%;background:#fff;border:1px solid #C7CDD1;border-radius:4px;color:#2D3B45;padding:10px 12px;height:42px;font:inherit;font-weight:400}
+.lms input:focus-visible{outline:2px solid #0374B5;outline-offset:1px}
+.lms .chk2{display:flex;flex-direction:row;align-items:center;gap:8px;font-weight:400}
+.lms-btn{height:44px;border-radius:4px;background:#E72429;color:#fff;font-weight:900;font-size:15px;width:100%}
+.lms-btn.ghost{background:#fff;color:#2D3B45;border:1px solid #C7CDD1}
+.lms-btn[disabled]{opacity:.7;cursor:progress}
+.lms-link{color:#0374B5;font-size:13px;text-align:center}
+.lms-perm{display:flex;gap:10px;font-size:14px;line-height:1.35}
+.lms-perm .ico{flex:none;margin-top:1px}
+.lms-perm.yes .ico{color:#2B7A3D}
+.lms-perm.no .ico{color:#C02A2A}
+.lms-sub{font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#6B7780}
+.lms-user{display:flex;gap:10px;align-items:center;padding:10px 12px;background:#F5F5F5;border-radius:8px;font-size:14px}
+.lms-user small{display:block;color:#6B7780;font-size:12px}
+.lms-row{display:flex;gap:10px}
+.lms-row .lms-btn{flex:1}
+
+/* sync */
+.sync{padding:28px 20px max(28px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
+.sync .mascot{width:120px;animation:bob 3.4s ease-in-out infinite}
+.sync h2{font-family:var(--font-d);font-weight:800;font-size:26px;letter-spacing:-.02em}
+.sync .lead{color:var(--muted);font-size:14.5px;max-width:30ch;margin-top:4px}
+.sync .bar{width:100%;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.sync .bar i{display:block;height:100%;background:var(--ring);border-radius:99px;transition:width .5s ease}
+.sync .card{width:100%}
+.srow{display:flex;gap:12px;align-items:center;padding:12px 14px;text-align:left;transition:opacity .3s}
+.srow+.srow{border-top:1px solid var(--line)}
+.srow i.c{width:10px;height:36px;border-radius:5px;flex:none}
+.srow .m{flex:1;min-width:0}.srow .m b{display:block}.srow .m span{font-size:12.5px;color:var(--muted)}
+.srow .st{width:26px;height:26px;display:grid;place-items:center;flex:none;color:var(--ok)}
+.srow.wait{opacity:.45}
+.spin{width:20px;height:20px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--blue);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sync .total{font-size:13px;font-weight:900;color:var(--ok)}

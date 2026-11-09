@@ -33,6 +33,7 @@ export const TITLES: Record<string, string> = {
 };
 
 export type State = {
+  entered: boolean;
   tab: Tab;
   dtab: "people" | "sessions";
   ctab: "board" | "messages" | "groups";
@@ -64,6 +65,7 @@ export type State = {
 };
 
 const initial = (): State => ({
+  entered: false,
   tab: "home",
   dtab: "people",
   ctab: "board",
@@ -130,6 +132,23 @@ function makeActions(
 
   const A = {
     go,
+    enter() {
+      setS((s) => ({ ...s, entered: true, tab: "home", chat: null }));
+      try {
+        history.replaceState(null, "", "#home");
+      } catch {
+        /* ignore */
+      }
+    },
+    signOut() {
+      /* back to the connect flow, with the demo reset so it can be replayed */
+      setS(() => initial());
+      try {
+        history.replaceState(null, "", location.pathname);
+      } catch {
+        /* ignore */
+      }
+    },
     openSessions() {
       go("discover", {
         dtab: "sessions",
@@ -381,8 +400,13 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const apply = () => {
       const h = location.hash.slice(1);
+      /* a tab in the URL (e.g. #collaborate) skips the connect flow, handy for deep links */
       if (h in TITLES || h === "home") {
-        setS((s) => (h !== s.tab || s.chat ? { ...s, tab: h as Tab, chat: null } : s));
+        setS((s) =>
+          h !== s.tab || s.chat || !s.entered
+            ? { ...s, tab: h as Tab, chat: null, entered: true }
+            : s,
+        );
       }
     };
     apply();
@@ -390,13 +414,14 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("hashchange", apply);
   }, []);
 
-  /* Buddy offers to suggest the profile after a moment */
+  /* Buddy offers to suggest the profile a moment after you get into the app */
   useEffect(() => {
+    if (!S.entered) return;
     const t = setTimeout(() => {
       setS((s) => (!s.sugg ? { ...s, sugg: "offer", alert: "offer" } : s));
     }, 2600);
     return () => clearTimeout(t);
-  }, []);
+  }, [S.entered]);
 
   /* the other student says yes a few seconds after you do */
   useEffect(() => {

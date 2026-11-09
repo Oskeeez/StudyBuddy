@@ -8,6 +8,7 @@ import Buddy from "./screens/Buddy";
 import ChatView from "./screens/ChatView";
 import Collaborate from "./screens/Collaborate";
 import Discover from "./screens/Discover";
+import Onboarding from "./Onboarding";
 import Home from "./screens/Home";
 import Profile from "./screens/Profile";
 import { Avatar, Icon } from "./ui";
@@ -179,6 +180,17 @@ function Shell() {
     buddy: <Buddy />,
     profile: <Profile />,
   };
+
+  /* connect flow first: fake Canvas sign-in, then the app */
+  if (!S.entered) {
+    return (
+      <div className="stage">
+        <div className="shell">
+          <Onboarding />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="stage">
