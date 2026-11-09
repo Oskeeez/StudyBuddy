@@ -173,11 +173,12 @@ function Shell() {
     if (mainRef.current) mainRef.current.scrollTop = 0;
   }, [S.tab, S.chat, S.dtab, S.ctab]);
 
+  const buddyOn = S.tab === "buddy" && !S.chat;
   const screens: Record<Tab, React.ReactNode> = {
     home: <Home />,
     discover: <Discover />,
     collaborate: <Collaborate />,
-    buddy: <Buddy />,
+    buddy: null,
     profile: <Profile />,
   };
 
@@ -194,10 +195,13 @@ function Shell() {
 
   return (
     <div className="stage">
-      <div className="shell">
+      <div className="shell app">
         <Top />
         <main className="main" ref={mainRef}>
           {S.chat ? <ChatView /> : screens[S.tab]}
+          <div className="buddyhost" hidden={!buddyOn}>
+            <Buddy active={buddyOn} />
+          </div>
         </main>
         <Nav />
         <AlertPop />

@@ -9,8 +9,6 @@
   --ring:linear-gradient(135deg,#2D7BFF,#19C3D3 55%,#7BE0A5);
   --font-d:'Plus Jakarta Sans','Lato',system-ui,sans-serif; --font-b:'Lato',system-ui,-apple-system,'Segoe UI',sans-serif;
   color-scheme:light;
-  padding-top:env(safe-area-inset-top,0px);
-  padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0A1325; --surface:#14213C; --ink:#E8EEF8; --muted:#9DB0C9; --line:#25364F;

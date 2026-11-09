@@ -280,6 +280,7 @@ export function itemsFor(d: Date): AgendaItem[] {
 /* ---------- to do, board posts, chats ---------- */
 export type Todo = {
   id: number;
+  due: string;
   subj: SubjKey;
   t: string;
   s: string;
@@ -290,6 +291,7 @@ export type Todo = {
 export const TODO: Todo[] = [
   {
     id: 1,
+    due: "2026-11-09T23:59",
     subj: "EGB273",
     t: "Assessment 2: workforce section draft",
     s: "Due Mon 9 Nov, 11:59 pm",
@@ -299,6 +301,7 @@ export const TODO: Todo[] = [
   },
   {
     id: 2,
+    due: "2026-11-10T09:00",
     subj: "EGB275",
     t: "Tutorial 7 problems",
     s: "Due Tue 10 Nov, 9:00 am",
@@ -308,6 +311,7 @@ export const TODO: Todo[] = [
   },
   {
     id: 3,
+    due: "2026-11-13T17:00",
     subj: "BSB105",
     t: "Case study reflection",
     s: "Due Fri 13 Nov, 5:00 pm",

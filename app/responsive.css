@@ -1,0 +1,59 @@
+/* ---------- Responsive layers (loaded last) ---------- */
+
+/* tablet: same phone-style frame, just roomier */
+@media (min-width:700px) and (max-width:999px){
+  .shell{max-width:620px}
+}
+
+/* short landscape screens (phones on their side): drop the frame, use the space */
+@media (max-height:520px) and (max-width:999px){
+  .stage{padding:0}
+  .shell{height:100%;max-width:680px;border-radius:0;border-top:0;border-bottom:0;box-shadow:none}
+  .top{min-height:44px}
+  .nav button{flex-direction:row;justify-content:center;gap:6px;padding:8px 0}
+  .nav button[aria-current="page"]::after{display:none}
+  .nav .bd{position:static;margin-left:2px}
+  .toast{bottom:64px}
+}
+
+/* desktop: sidebar navigation + a centred reading column */
+@media (min-width:1000px){
+  .stage{padding:24px}
+  .shell.app{
+    max-width:1240px;height:min(100%,920px);border-radius:28px;
+    display:grid;grid-template-columns:240px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);
+    border:1px solid var(--line);box-shadow:0 20px 60px rgba(15,45,94,.18);
+  }
+  .shell.app .nav{
+    grid-column:1;grid-row:1 / 3;display:flex;flex-direction:column;gap:4px;align-content:start;
+    border:0;border-right:1px solid var(--line);border-radius:0;box-shadow:none;
+    padding:28px 14px;background:color-mix(in srgb,var(--surface) 72%,transparent);
+  }
+  .shell.app .nav::before{
+    content:"Study Buddy";display:block;font-family:var(--font-d);font-weight:800;font-size:22px;letter-spacing:-.02em;
+    padding:0 14px 18px;
+  }
+  .shell.app .nav button{flex-direction:row;justify-content:flex-start;gap:12px;padding:12px 14px;border-radius:14px;font-size:15px}
+  .shell.app .nav button:hover{background:var(--soft)}
+  .shell.app .nav button[aria-current="page"]{background:var(--soft)}
+  .shell.app .nav button[aria-current="page"]::after{display:none}
+  .shell.app .nav .bd{position:static;margin-left:auto}
+  .shell.app .top{grid-column:2;grid-row:1;padding-left:max(28px,calc((100% - 840px)/2 + 16px));padding-right:max(28px,calc((100% - 840px)/2 + 16px))}
+  .shell.app .main{grid-column:2;grid-row:2}
+  .shell.app .main>*{max-width:840px;margin-left:auto;margin-right:auto;width:100%}
+  .shell.app .toast{bottom:28px;left:calc(50% + 120px)}
+  .shell.app .alert{left:auto;right:24px;top:20px;width:400px}
+  .shell.app .sheet{align-items:center;justify-content:center}
+  .shell.app .sheet .panel{width:min(520px,92%);max-height:82%;border-radius:26px}
+  .shell.app .sheet .grab{display:none}
+  .bscroll{padding-top:20px}
+  .bcomp{padding-bottom:18px}
+  .sug{padding:14px 16px}
+  .bbody{font-size:15.5px}
+}
+
+/* very large screens: let the frame breathe a little more */
+@media (min-width:1700px) and (min-height:1000px){
+  .shell.app{height:min(100%,1000px);max-width:1340px}
+}
+@media (min-width:1000px){ .bcomp{background:none} }
