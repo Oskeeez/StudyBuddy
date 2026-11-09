@@ -57,3 +57,44 @@
   .shell.app{height:min(100%,1000px);max-width:1340px}
 }
 @media (min-width:1000px){ .bcomp{background:none} }
+
+/* ---------- Onboarding + fake Canvas login on desktop ---------- */
+@media (min-width:1000px){
+  .shell.ob-shell{
+    max-width:1180px;height:min(100%,780px);border-radius:28px;
+    border:1px solid var(--line);box-shadow:0 20px 60px rgba(15,45,94,.18);
+  }
+
+  /* welcome: story on the left, steps and button on the right */
+  .ob-welcome{
+    display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;column-gap:72px;row-gap:0;
+    padding:56px 80px;text-align:left;align-items:center;justify-items:start;
+  }
+  .ob-welcome .mascot{width:280px;margin:0;align-self:end;justify-self:center;grid-column:1;grid-row:1}
+  .ob-welcome>div:nth-child(2){grid-column:1;grid-row:2;align-self:start;justify-self:center;text-align:center;padding-top:12px}
+  .ob-welcome h1{font-size:72px}
+  .ob-welcome .tag2{font-size:19px;max-width:26ch;margin:14px auto 0}
+  .ob-welcome .ob-steps{grid-column:2;grid-row:1;align-self:end;gap:12px;padding-bottom:18px}
+  .ob-welcome .ob-step{font-size:16px;padding:16px 18px;border-radius:18px}
+  .ob-welcome .ob-cta{grid-column:2;grid-row:2;align-self:start;align-items:flex-start;padding-top:10px}
+  .ob-welcome .btn.big{height:58px;font-size:17px}
+  .ob-welcome .ob-note{text-align:left}
+
+  /* fake Canvas pages: wider hero, centred card */
+  .lms-hero{padding:44px 24px 84px}
+  .lms-hero .logo{width:68px;height:68px}
+  .lms-hero h2{font-size:26px}
+  .lms-hero p{font-size:15.5px}
+  .lms-card{width:min(460px,calc(100% - 48px));margin:-52px auto 32px;padding:28px 28px}
+
+  /* sync */
+  .sync{justify-content:center;padding:40px 24px}
+  .sync>*{max-width:520px}
+  .sync .mascot{width:150px}
+  .sync h2{font-size:32px}
+}
+@media (min-width:1700px) and (min-height:900px){
+  .shell.ob-shell{max-width:1400px;height:min(100%,900px)}
+  .ob-welcome .mascot{width:320px}
+  .ob-welcome h1{font-size:84px}
+}

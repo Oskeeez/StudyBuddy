@@ -186,7 +186,7 @@ function Shell() {
   if (!S.entered) {
     return (
       <div className="stage">
-        <div className="shell">
+        <div className="shell ob-shell">
           <Onboarding />
         </div>
       </div>
