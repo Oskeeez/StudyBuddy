@@ -287,7 +287,7 @@ function makeActions(
           ...s.posts,
         ],
       }));
-      toast("Posted anonymously");
+      toast("Posted");
       return true;
     },
     helpful(id: number) {

@@ -8,7 +8,7 @@
   --c-275:#2160D9; --c-270:#0E8F8A; --c-273:#D9730D; --c-105:#C2417A;
   --ring:linear-gradient(135deg,#2D7BFF,#19C3D3 55%,#7BE0A5);
   --font-d:'Plus Jakarta Sans','Lato',system-ui,sans-serif; --font-b:'Lato',system-ui,-apple-system,'Segoe UI',sans-serif;
-  color-scheme:light;
+  color-scheme:only light;
 }
 
 *{box-sizing:border-box}

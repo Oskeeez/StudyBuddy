@@ -316,7 +316,7 @@ export function PostCard({ p }: { p: Post }) {
               type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Reply anonymously"
+              placeholder="Write a reply"
               aria-label="Reply"
               autoComplete="off"
             />

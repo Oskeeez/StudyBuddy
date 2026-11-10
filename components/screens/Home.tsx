@@ -112,7 +112,7 @@ export default function Home() {
           </div>
           <div className="t">
             <h3>Collaborate</h3>
-            <p>Ask questions anonymously and chat with your cohort.</p>
+            <p>Ask questions and chat with your cohort.</p>
           </div>
           <span className="go">
             <Icon n="arrow" c="sm" />
@@ -230,7 +230,6 @@ export default function Home() {
         </div>
       </section>
 
-      <p className="note">Prototype with fictional demo content. Not connected to real student accounts.</p>
     </div>
   );
 }

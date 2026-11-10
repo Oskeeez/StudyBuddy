@@ -58,16 +58,6 @@ function Board() {
 
   return (
     <>
-      <div className="guide">
-        <Icon n="shield" c="sm" />
-        <span>
-          <b>Anonymous and respectful.</b> Inappropriate posts are removed and earn a warning.
-          {S.guide
-            ? " After 3 warnings you are banned from posting and commenting, and need your faculty’s permission to return."
-            : ""}{" "}
-          <button onClick={A.guide}>{S.guide ? "Less" : "Details"}</button>
-        </span>
-      </div>
       <div className="chiprow">
         {["All", ...SUBJ_KEYS].map((k) => (
           <button key={k} className="chip" aria-pressed={S.filter === k} onClick={() => A.filter(k)}>
@@ -89,7 +79,7 @@ function Board() {
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Ask with confidence. Your question is always anonymous."
+          placeholder="Ask your cohort a question"
           aria-label="Your question"
         />
         <div className="sim">
@@ -113,7 +103,7 @@ function Board() {
             <Icon n="lock" c="sm" />
             {ok ? (
               <>
-                Posting anonymously in <b>{S.filter}</b>
+                Posting in <b>{S.filter}</b>
               </>
             ) : (
               "Choose a subject above to post"

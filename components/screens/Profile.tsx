@@ -77,8 +77,8 @@ export default function Profile() {
           <div className="card set">
             <button className="row" onClick={A.signOut}>
               <span className="m">
-                <b>Connected to Canvas (demo)</b>
-                <span>Tap to disconnect and replay the sign-in.</span>
+                <b>Connected to Canvas</b>
+                <span>Tap to disconnect.</span>
               </span>
             </button>
           </div>

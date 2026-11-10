@@ -38,7 +38,6 @@ function Welcome({ next }: { next: () => void }) {
         <button className="btn big" onClick={next}>
           Connect with Canvas
         </button>
-        <p className="ob-note">Prototype. No real account needed.</p>
       </div>
     </div>
   );
@@ -58,7 +57,6 @@ function Login({ next, back }: { next: () => void; back: () => void }) {
 
   return (
     <div className="lms fade">
-      <div className="lms-demo">Demo screen. Not the real login. Nothing you type leaves this page.</div>
       <div className="lms-hero">
         <div className="logo">
           <Icon n="cap" />
@@ -111,7 +109,6 @@ function Login({ next, back }: { next: () => void; back: () => void }) {
 function Allow({ next, cancel }: { next: () => void; cancel: () => void }) {
   return (
     <div className="lms fade">
-      <div className="lms-demo">Demo screen. Not the real login. Nothing you type leaves this page.</div>
       <div className="lms-hero">
         <div className="logo">
           <Icon n="cap" />
@@ -227,9 +224,7 @@ function Sync() {
             Open Study Buddy
           </button>
         </>
-      ) : (
-        <p className="ob-note">Demo. No real files are downloaded.</p>
-      )}
+      ) : null}
     </div>
   );
 }

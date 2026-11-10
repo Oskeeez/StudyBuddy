@@ -7,13 +7,15 @@ import "./responsive.css";
 export const metadata: Metadata = {
   title: "Study Buddy",
   description:
-    "Find your people and study smarter at QUT. Prototype with fictional demo content.",
+    "Find your people and study smarter at QUT.",
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  colorScheme: "only light",
+  themeColor: "#F1F6FF",
 };
 
 export default function RootLayout({
