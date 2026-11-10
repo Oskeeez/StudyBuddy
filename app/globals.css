@@ -386,7 +386,7 @@ button.opl{display:flex;gap:4px;align-items:center;width:100%;text-align:left;pa
 .subtile b{font-family:var(--font-d);font-weight:800;font-size:15px;color:color-mix(in srgb,var(--c) 70%,#000)}
 .subtile span{font-size:12.5px;color:var(--ink);opacity:.8;line-height:1.3}
 .pcard{overflow:hidden}
-.pblock{padding:14px 14px 4px}
+.pblock{padding:14px 14px 14px}
 .pblock+.pblock{border-top:1px solid var(--line);padding-bottom:12px}
 .pblock .sub{font-size:12.5px;font-weight:800;color:var(--muted);margin:0 0 8px}
 .pcard>.pblock:last-child,.pcard .pblock:has(+.chips){padding-bottom:12px}
@@ -394,6 +394,6 @@ button.opl{display:flex;gap:4px;align-items:center;width:100%;text-align:left;pa
 .themes>.pblock:first-child{border-top:0}
 .themes>.pblock .sub{margin:0}
 .picks{display:flex;gap:8px;flex-wrap:wrap}
-.pick{width:48px;height:48px;border-radius:14px;background:var(--surface);border:1.5px solid var(--line);display:grid;place-items:center;transition:background .15s,border-color .15s,box-shadow .15s}
-.pick svg{width:30px;height:30px;display:block}
+.pick{width:46px;height:46px;border-radius:13px;background:var(--surface);border:1.5px solid var(--line);display:grid;place-items:center;transition:background .15s,border-color .15s,box-shadow .15s}
+.pick svg{width:36px;height:36px;display:block}
 .pick[aria-pressed="true"]{background:#FFF1C9;border-color:var(--btn);box-shadow:0 0 0 1.5px var(--btn)}
