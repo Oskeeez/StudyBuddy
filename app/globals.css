@@ -375,12 +375,11 @@ button.opl{display:flex;gap:4px;align-items:center;width:100%;text-align:left;pa
 .themes .row[aria-checked=true] .ck .ico{opacity:1}
 
 /* profile page */
-.prof .pid{display:flex;align-items:center;gap:14px;padding-top:6px}
-.prof .pid .who{flex:1;min-width:0}
+.prof .pid{display:flex;align-items:center;gap:8px;padding-top:6px}
+.prof .pid .who{flex:none;min-width:0}
 .prof .pid h2{font-family:var(--font-d);font-weight:800;font-size:22px;letter-spacing:-.02em}
 .prof .pid p{color:var(--muted);font-size:14px;margin-top:2px}
-.prof .pid .mascot{width:84px;flex:none;margin:-14px -10px -14px 0}
-.prof .av.l{width:68px;height:68px;font-size:24px;border:0;background:#FFE680!important;color:var(--btn);box-shadow:0 0 0 2px var(--btn)}
+.prof .pid .mascot{width:84px;flex:none;margin:-14px 0 -14px -6px}
 .prof .lab{text-transform:none;letter-spacing:0;font-size:14px;font-weight:800;color:color-mix(in srgb,var(--ink) 75%,transparent);margin:0 0 8px 2px}
 .subgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .subtile{border-radius:16px;padding:12px 14px;background:color-mix(in srgb,var(--c) 13%,var(--surface));display:flex;flex-direction:column;gap:2px;min-width:0}

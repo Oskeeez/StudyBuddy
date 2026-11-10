@@ -3,7 +3,7 @@
 import { SUBJ, SUBJ_KEYS } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { THEMES, useTheme } from "@/lib/theme";
-import { Avatar, Icon, Mascot } from "../ui";
+import { Icon, Mascot } from "../ui";
 
 const GROUPS: Record<string, string[]> = {
   "How I learn": ["Visual", "Talking it through", "Practice problems", "Reading"],
@@ -23,7 +23,6 @@ export default function Profile() {
     <div className="fade prof">
       <div className="px" style={{ display: "flex", flexDirection: "column", gap: 20, paddingTop: 4, paddingBottom: 28 }}>
         <div className="pid">
-          <Avatar name="Anusha Lawson" size="l" i={0} />
           <div className="who">
             <h2>Anusha Lawson</h2>
             <p>Civil Engineering · Year 2</p>
