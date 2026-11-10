@@ -49,11 +49,15 @@ ${ray(40, 8, 40, 16)}${ray(40, 64, 40, 72)}${ray(8, 40, 16, 40)}${ray(64, 40, 72
 <path d="M57 46L59 51L64 53L59 55L57 60L55 55L50 53L55 51Z" fill="${Y2}"/>
 <path d="M55 21L56.500 24.500L60 26L56.500 27.500L55 31L53.500 27.500L50 26L53.500 24.500Z" fill="${W}"/>`,
 
-  /* On campus: a university building with columns */
-  "On campus": `<path d="M8 30L40 11L72 30Z" fill="${PINK}" ${st()}/>
-<rect x="14" y="30" width="52" height="30" fill="${W}"/>
-<path d="M22 36V56M36 36V56M50 36V56M64 36V56" fill="none" ${st(5)}/>
-<rect x="8" y="60" width="64" height="10" rx="3" fill="${Y2}" ${st()}/>`,
+  /* On campus: a university hall with a clock tower */
+  "On campus": `<rect x="8" y="38" width="64" height="30" rx="3" fill="${PINK}" ${st()}/>
+<rect x="29" y="16" width="22" height="52" rx="2" fill="${Y2}" ${st()}/>
+<path d="M26 16L40 4L54 16Z" fill="${LILAC}" ${st()}/>
+<circle cx="40" cy="27" r="5.500" fill="${W}" ${st(3.5)}/>
+<path d="M40 24V27H43" fill="none" ${st(2.5)}/>
+<path d="M34 68V56A6 6 0 0 1 46 56V68Z" fill="${SKY}" ${st(3.5)}/>
+<rect x="14" y="46" width="9" height="9" rx="1.500" fill="${W}" ${st(3)}/>
+<rect x="57" y="46" width="9" height="9" rx="1.500" fill="${W}" ${st(3)}/>`,
 
   /* Online: a laptop with someone on a video call */
   Online: `<rect x="12" y="12" width="56" height="40" rx="6" fill="${SKY}" ${st()}/>
