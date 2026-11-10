@@ -11,7 +11,7 @@ import Discover from "./screens/Discover";
 import Onboarding from "./Onboarding";
 import Home from "./screens/Home";
 import Profile from "./screens/Profile";
-import { Avatar, Icon } from "./ui";
+import { Avatar, Icon, Mascot } from "./ui";
 
 function Top() {
   const { S, A } = useStore();
@@ -70,7 +70,7 @@ function Nav() {
           aria-current={S.tab === k ? "page" : undefined}
           aria-label={l}
         >
-          <Icon n={i} />
+          <span className="ni">{k === "buddy" ? <Mascot fit="face" c="navmas" /> : <Icon n={i} />}</span>
           {l}
           {k === "collaborate" && unread > 0 && <span className="bd">{unread}</span>}
         </button>

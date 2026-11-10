@@ -34,6 +34,7 @@
     padding:0 14px 18px;
   }
   .shell.app .nav button{flex-direction:row;justify-content:flex-start;gap:12px;padding:12px 14px;border-radius:14px;font-size:15px}
+  .shell.app .nav .ni,.shell.app .nav button[aria-current="page"] .ni{background:none;width:auto;height:auto;border-radius:0}
   .shell.app .nav button:hover{background:var(--soft)}
   .shell.app .nav button[aria-current="page"]{background:var(--soft)}
   .shell.app .nav button[aria-current="page"]::after{display:none}
