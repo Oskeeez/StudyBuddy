@@ -393,7 +393,7 @@ button.opl{display:flex;gap:4px;align-items:center;width:100%;text-align:left;pa
 .themes>.pblock{padding-bottom:2px;border-top:1px solid var(--line)}
 .themes>.pblock:first-child{border-top:0}
 .themes>.pblock .sub{margin:0}
-.picks{display:flex;gap:10px;flex-wrap:wrap}
-.pick{width:60px;height:60px;border-radius:17px;background:var(--surface);border:1.5px solid var(--line);display:grid;place-items:center;transition:background .15s,border-color .15s,box-shadow .15s}
-.pick svg{width:40px;height:40px;display:block}
+.picks{display:flex;gap:8px;flex-wrap:wrap}
+.pick{width:48px;height:48px;border-radius:14px;background:var(--surface);border:1.5px solid var(--line);display:grid;place-items:center;transition:background .15s,border-color .15s,box-shadow .15s}
+.pick svg{width:30px;height:30px;display:block}
 .pick[aria-pressed="true"]{background:#FFF1C9;border-color:var(--btn);box-shadow:0 0 0 1.5px var(--btn)}
