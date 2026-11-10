@@ -36,7 +36,7 @@ function Top() {
     );
   }
 
-  if (S.tab === "home") return null;
+  if (S.tab === "home" || S.tab === "profile") return null;
 
   return (
     <header className="top px">

@@ -11,6 +11,20 @@ const GROUPS: Record<string, string[]> = {
   Format: ["On campus", "Online", "Small groups"],
 };
 
+/* picked by picture, not words; the label stays as the tooltip and screen reader name */
+const PICK_ICON: Record<string, string> = {
+  Visual: "pv_visual",
+  "Talking it through": "pv_talk",
+  "Practice problems": "pv_practice",
+  Reading: "pv_read",
+  Mornings: "pv_morning",
+  Afternoons: "pv_afternoon",
+  Evenings: "pv_night",
+  "On campus": "pv_campus",
+  Online: "pv_online",
+  "Small groups": "pv_groups",
+};
+
 const PRIVACY: ["visible" | "buddy", string, string][] = [
   ["visible", "Show me to students in my subjects", "Only people enrolled in the same subjects can see you."],
   ["buddy", "Use Buddy insights for matching", "Lets Buddy share how you learn, never your answers or grades."],
@@ -21,7 +35,7 @@ export default function Profile() {
   const { theme, setTheme } = useTheme();
   return (
     <div className="fade prof">
-      <div className="px" style={{ display: "flex", flexDirection: "column", gap: 20, paddingTop: 4, paddingBottom: 28 }}>
+      <div className="px" style={{ display: "flex", flexDirection: "column", gap: 20, paddingTop: 14, paddingBottom: 28 }}>
         <div className="pid">
           <div className="who">
             <h2>Anusha Lawson</h2>
@@ -48,10 +62,17 @@ export default function Profile() {
             {Object.entries(GROUPS).map(([g, a]) => (
               <div className="pblock" key={g}>
                 <p className="sub">{g}</p>
-                <div className="chips">
+                <div className="picks">
                   {a.map((x) => (
-                    <button key={x} className="chip" aria-pressed={S.prefs.has(x)} onClick={() => A.pref(x)}>
-                      {x}
+                    <button
+                      key={x}
+                      className="pick"
+                      aria-pressed={S.prefs.has(x)}
+                      aria-label={x}
+                      title={x}
+                      onClick={() => A.pref(x)}
+                    >
+                      <Icon n={PICK_ICON[x]} />
                     </button>
                   ))}
                 </div>
