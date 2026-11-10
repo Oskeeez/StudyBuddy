@@ -1,10 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { SUBJ_KEYS, SYNC, TODO, type SubjKey } from "@/lib/data";
+import { TODO, type SubjKey } from "@/lib/data";
 import {
-  SAMPLE_QUESTION,
-  TOTAL_FILES,
   hoursLeft,
   moodOf,
   respond,
@@ -112,7 +110,6 @@ export default function Buddy({ active }: { active: boolean }) {
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState<string | null>(null);
   const [scope, setScope] = useState<"All" | SubjKey>("All");
-  const [scopeOpen, setScopeOpen] = useState(false);
   const nid = useRef(1);
   const scrollRef = useRef<HTMLDivElement>(null);
   const taRef = useRef<HTMLTextAreaElement>(null);
@@ -122,9 +119,13 @@ export default function Buddy({ active }: { active: boolean }) {
   const soon = TODO.filter((t) => !S.done.has(t.id) && hoursLeft(t.due) > 0 && hoursLeft(t.due) <= 72).sort((a, b) =>
     a.due.localeCompare(b.due),
   );
+  const NUM = ["No", "One", "Two", "Three", "Four", "Five"];
+  const next = soon.length ? soon[0].t.split(":")[0] : "";
   const ctxLine = soon.length
-    ? `${soon.length} ${soon.length > 1 ? "things" : "thing"} due in the next 3 days. Next up: ${soon[0].t}.`
-    : "Nothing due in the next 3 days. A good time to get ahead.";
+    ? soon.length === 1
+      ? `${next} is due soon. Want to get a head start on it together?`
+      : `${NUM[soon.length] ?? soon.length} things are due soon. Want to start with ${next}?`
+    : "Nothing is due in the next few days, so it is a nice time to get ahead.";
 
   const toBottom = useCallback(() => {
     const e = scrollRef.current;
@@ -153,7 +154,6 @@ export default function Buddy({ active }: { active: boolean }) {
       const reply = respond(f, t, { scope: scopeOverride ?? scope, done: S.done, joined: S.joined });
       setMsgs((m) => [...m, { id: nid.current++, role: "user", text: t }]);
       setInput("");
-      setScopeOpen(false);
       const src = reply.sources?.[0];
       setThinking(src ? `Reading ${src.label}` : "Searching your course files");
       setTimeout(() => {
@@ -169,8 +169,6 @@ export default function Buddy({ active }: { active: boolean }) {
     send(text, flow, "All");
   };
 
-  const scopeLabel =
-    scope === "All" ? `Answering from ${SYNC.length} subjects · ${TOTAL_FILES} files` : `Answering from ${scope} only`;
   const last = msgs.length ? msgs[msgs.length - 1] : null;
 
   return (
@@ -185,10 +183,6 @@ export default function Buddy({ active }: { active: boolean }) {
                 <p className="bctx">{ctxLine}</p>
               </div>
             </div>
-            <span className="bsync">
-              <Icon n="check" c="sm" />
-              Synced from Canvas · {SYNC.length} subjects · {TOTAL_FILES} files
-            </span>
             <p className="lab" style={{ margin: "6px 0 0" }}>
               Suggested for you
             </p>
@@ -203,10 +197,6 @@ export default function Buddy({ active }: { active: boolean }) {
                 </button>
               ))}
             </div>
-            <button className="btry" onClick={() => setInput(SAMPLE_QUESTION)}>
-              <Icon n="shield" c="sm" />
-              Paste an assignment question to see guided practice
-            </button>
           </div>
         ) : (
           <>
@@ -246,13 +236,8 @@ export default function Buddy({ active }: { active: boolean }) {
       </div>
 
       <div className="bcomp px">
-        <div className="bscope">
-          <button className="scope" onClick={() => setScopeOpen((o) => !o)} aria-expanded={scopeOpen}>
-            <Icon n="book" c="sm" />
-            {scopeLabel}
-            <Icon n="arrow" c="sm" />
-          </button>
-          {msgs.length > 0 && (
+        {msgs.length > 0 && (
+          <div className="bscope">
             <button
               className="newc"
               onClick={() => {
@@ -262,23 +247,6 @@ export default function Buddy({ active }: { active: boolean }) {
             >
               New chat
             </button>
-          )}
-        </div>
-        {scopeOpen && (
-          <div className="chiprow fade">
-            {(["All", ...SUBJ_KEYS] as ("All" | SubjKey)[]).map((k) => (
-              <button
-                key={k}
-                className="chip"
-                aria-pressed={scope === k}
-                onClick={() => {
-                  setScope(k);
-                  setScopeOpen(false);
-                }}
-              >
-                {k === "All" ? "All subjects" : k}
-              </button>
-            ))}
           </div>
         )}
         <form
