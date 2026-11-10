@@ -1,4 +1,5 @@
-import { GRAD, IC, MASCOT_INNER, SUBJ, type SubjKey } from "@/lib/data";
+import { GRAD, IC, SUBJ, type SubjKey } from "@/lib/data";
+import { MASCOT, MASCOT_VIEWBOX, type Mood } from "@/lib/mascot";
 
 export function Icon({ n, c = "" }: { n: string; c?: string }) {
   return (
@@ -11,13 +12,14 @@ export function Icon({ n, c = "" }: { n: string; c?: string }) {
   );
 }
 
-export function Mascot({ c = "" }: { c?: string }) {
+/* Buddy's sticky-note mascot. Peely unless a mood is passed. "face" crops tight for small avatars. */
+export function Mascot({ c = "", mood = "peely", fit = "full" }: { c?: string; mood?: Mood; fit?: "full" | "face" }) {
   return (
     <svg
       className={`mascot ${c}`}
-      viewBox="0 0 200 190"
+      viewBox={MASCOT_VIEWBOX[fit]}
       aria-hidden="true"
-      dangerouslySetInnerHTML={{ __html: MASCOT_INNER }}
+      dangerouslySetInnerHTML={{ __html: MASCOT[mood] }}
     />
   );
 }

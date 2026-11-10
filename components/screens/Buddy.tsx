@@ -6,6 +6,7 @@ import {
   SAMPLE_QUESTION,
   TOTAL_FILES,
   hoursLeft,
+  moodOf,
   respond,
   route,
   suggest,
@@ -66,7 +67,7 @@ function BuddyMessage({
   return (
     <div className="bb fade">
       <div className="bot">
-        <Icon n="buddy" />
+        <Mascot fit="face" mood={moodOf(r)} />
       </div>
       <div className="bbody">
         <div className="bname">
@@ -228,7 +229,7 @@ export default function Buddy({ active }: { active: boolean }) {
             {busy && (
               <div className="bb fade">
                 <div className="bot">
-                  <Icon n="buddy" />
+                  <Mascot fit="face" mood="hmm" />
                 </div>
                 <div className="think">
                   <span>{thinking}</span>

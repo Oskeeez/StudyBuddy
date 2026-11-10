@@ -1,4 +1,4 @@
-/* Layout: phone-shaped shell on a soft pastel gradient. Light header, scrolling screen, 5-tab bar. Big tinted cards, navy pill buttons, Buddy robot mascot. */
+/* Layout: phone-shaped shell on a soft pastel gradient. Light header, scrolling screen, 5-tab bar. Big tinted cards, navy pill buttons, Buddy sticky-note mascot. */
 :root{
   --bg:#F1F6FF; --surface:#FFFFFF; --ink:#0F2547; --muted:#546782; --line:#DDE6F4;
   --blue:#1F62D6; --btn:#0F2D5E; --soft:#E3EDFF; --field:#F4F8FF;
@@ -7,8 +7,24 @@
   --blob1:#CFE0FF; --blob2:#DCEBFF; --glass:rgba(255,255,255,.72);
   --c-275:#2160D9; --c-270:#0E8F8A; --c-273:#D9730D; --c-105:#C2417A;
   --ring:linear-gradient(135deg,#2D7BFF,#19C3D3 55%,#7BE0A5);
+  --cover:linear-gradient(120deg,#0B2A55,#1F62D6 60%,#13B5C8); --bub:linear-gradient(135deg,#2D7BFF,#1F62D6);
   --font-d:'Plus Jakarta Sans','Lato',system-ui,sans-serif; --font-b:'Lato',system-ui,-apple-system,'Segoe UI',sans-serif;
   color-scheme:only light;
+}
+/* Option 1: sticky note classic. The mascot's own pastels on a soft blue page, yellow for highlights. */
+:root[data-theme="opt1"]{
+  --bg:#E3EEFF; --ink:#0F2D5E; --muted:#4F6486; --line:#C9DAF4; --field:#F1F6FF; --soft:#EBE5FB;
+  --t-blue:#CFE3FF; --t-peri:#EBE5FB; --t-mint:#DDF5E9; --t-peach:#FFEADB;
+  --blob1:#EBE5FB; --blob2:#DDF5E9; --glass:rgba(255,255,255,.74);
+  --ring:linear-gradient(135deg,#FFD84D,#FFE680); --cover:linear-gradient(120deg,#0F2D5E,#3A64C8 62%,#FFD84D); --bub:linear-gradient(135deg,#3A64C8,#0F2D5E);
+}
+/* Option 2: warm paper. Cream page, warm ink, sticky-note yellow accent, navy for buttons. */
+:root[data-theme="opt2"]{
+  --bg:#FBF7EE; --ink:#2B2A28; --muted:#6F6A60; --line:#E8E0CF; --field:#F6F1E4; --soft:#FFF1C9;
+  --blue:#0F2D5E; --shadow:0 2px 4px rgba(60,45,10,.05),0 10px 24px rgba(60,45,10,.07);
+  --t-blue:#E6ECF7; --t-peri:#EEE8F6; --t-mint:#E2F0E5; --t-peach:#FBE8D3;
+  --blob1:#F6EBCB; --blob2:#FBF1D8; --glass:rgba(251,247,238,.78);
+  --ring:linear-gradient(135deg,#F2B134,#FFD84D); --cover:linear-gradient(120deg,#0F2D5E,#2B4A86 60%,#F2B134); --bub:linear-gradient(135deg,#0F2D5E,#16397A);
 }
 
 *{box-sizing:border-box}
@@ -55,6 +71,7 @@ h1,h2,h3,p{margin:0}
 .hi h2{font-family:var(--font-d);font-weight:800;font-size:31px;letter-spacing:-.025em}
 .hi h2 u{text-decoration:none;background:linear-gradient(transparent 76%,#F7C95C 76%,#F7C95C 90%,transparent 90%)}
 .hi p{color:var(--ink);font-size:16px;margin-top:2px}
+.mascot{overflow:visible}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-6px) rotate(1.5deg)}}
 .search{display:flex;align-items:center;gap:10px;background:var(--glass);border:1.5px solid var(--line);border-radius:99px;padding:0 16px;height:50px;box-shadow:var(--shadow);color:var(--muted)}
 .search input[type=text]{flex:1;min-width:0;border:0;background:none;font:inherit;color:var(--ink);outline:0;height:100%;padding:0;border-radius:0}
@@ -210,7 +227,7 @@ textarea{resize:none;min-height:70px}
 code.mount{font-size:12px;background:var(--surface);border:1px solid var(--line);padding:3px 8px;border-radius:6px}
 
 /* profile */
-.cover{height:110px;background:linear-gradient(120deg,#0B2A55,#1F62D6 60%,#13B5C8)}
+.cover{height:110px;background:var(--cover)}
 .pid{display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:-46px;gap:2px}
 .pid h2{font-family:var(--font-d);font-weight:800;font-size:24px;margin-top:6px}
 .pid p{color:var(--muted)}
@@ -326,7 +343,7 @@ code.mount{font-size:12px;background:var(--surface);border:1px solid var(--line)
 .mr{display:flex;gap:8px;align-items:flex-end}
 .mr.me{justify-content:flex-end}
 .mr .bub{align-self:auto;background:color-mix(in srgb,var(--muted) 14%,var(--surface));border:0;border-radius:22px;max-width:74%}
-.mr.me .bub{background:linear-gradient(135deg,#2D7BFF,#1F62D6);color:#fff}
+.mr.me .bub{background:var(--bub);color:#fff}
 .pillin{flex:1;display:flex;align-items:center;gap:8px;background:var(--field);border:1.5px solid var(--line);border-radius:99px;padding:3px}
 .pillin input[type=text]{border:0;background:none;padding:0 4px;height:38px;border-radius:0;flex:1;min-width:0}
 .camc{width:38px;height:38px;border-radius:50%;background:var(--ring);display:grid;place-items:center;color:#06234B;flex:none}
@@ -355,3 +372,13 @@ button.opl{display:flex;gap:4px;align-items:center;width:100%;text-align:left;pa
 .fade{animation:fade .22s ease}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* settings: theme picker */
+.themes .row{gap:12px}
+.themes .sw{display:flex;flex:none}
+.themes .sw i{width:18px;height:18px;border-radius:50%;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--line);margin-left:-6px}
+.themes .sw i:first-child{margin-left:0}
+.themes .ck{width:22px;height:22px;border-radius:50%;flex:none;display:grid;place-items:center;border:2px solid var(--line);color:#fff}
+.themes .row[aria-checked=true] .ck{background:var(--btn);border-color:var(--btn)}
+.themes .ck .ico{width:13px;height:13px;opacity:0}
+.themes .row[aria-checked=true] .ck .ico{opacity:1}

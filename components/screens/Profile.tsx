@@ -2,7 +2,8 @@
 
 import { SUBJ, SUBJ_KEYS } from "@/lib/data";
 import { useStore } from "@/lib/store";
-import { Avatar } from "../ui";
+import { THEMES, useTheme } from "@/lib/theme";
+import { Avatar, Icon } from "../ui";
 
 const GROUPS: Record<string, string[]> = {
   "How I learn": ["Visual", "Talking it through", "Practice problems", "Reading"],
@@ -17,6 +18,7 @@ const PRIVACY: ["visible" | "buddy", string, string][] = [
 
 export default function Profile() {
   const { S, A } = useStore();
+  const { theme, setTheme } = useTheme();
   return (
     <div className="fade">
       <div className="cover" />
@@ -68,6 +70,27 @@ export default function Profile() {
                   <span>{d}</span>
                 </span>
                 <span className="tg" />
+              </button>
+            ))}
+          </div>
+        </section>
+        <section>
+          <p className="lab">Appearance</p>
+          <div className="card set themes" role="radiogroup" aria-label="Colour theme">
+            {THEMES.map((t) => (
+              <button key={t.id} className="row" role="radio" aria-checked={theme === t.id} onClick={() => setTheme(t.id)}>
+                <span className="sw" aria-hidden="true">
+                  {t.swatch.map((c) => (
+                    <i key={c} style={{ background: c }} />
+                  ))}
+                </span>
+                <span className="m">
+                  <b>{t.label}</b>
+                  <span>{t.note}</span>
+                </span>
+                <span className="ck" aria-hidden="true">
+                  <Icon n="check" c="sm" />
+                </span>
               </button>
             ))}
           </div>

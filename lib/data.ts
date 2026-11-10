@@ -48,18 +48,6 @@ export const SYNC: { k: SubjKey; items: [string, number][] }[] = [
   { k: "BSB105", items: [["lecture slides", 10], ["case studies", 4], ["readings", 5]] },
 ];
 
-/* Buddy the robot mascot (original drawing) */
-export const MASCOT_INNER = `
-<ellipse cx="30" cy="108" rx="13" ry="22" fill="#3A64C8" stroke="#0F2D5E" stroke-width="5"/><ellipse cx="170" cy="108" rx="13" ry="22" fill="#3A64C8" stroke="#0F2D5E" stroke-width="5"/>
-<rect x="40" y="56" width="120" height="104" rx="46" fill="#fff" stroke="#0F2D5E" stroke-width="5"/>
-<rect x="54" y="74" width="92" height="66" rx="30" fill="#0F2D5E"/>
-<path d="M72 109q10-15 20 0M108 109q10-15 20 0" fill="none" stroke="#fff" stroke-width="5.500" stroke-linecap="round"/>
-<path d="M92 124q8 8 16 0" fill="none" stroke="#8FE3D0" stroke-width="4.500" stroke-linecap="round"/>
-<path d="M68 52v14q32 14 64 0V52" fill="#16397A" stroke="#0F2D5E" stroke-width="4" stroke-linejoin="round"/>
-<path d="M100 18l70 24-70 24-70-24Z" fill="#0F2D5E" stroke="#0F2D5E" stroke-width="4" stroke-linejoin="round"/>
-<path d="M100 42l56 8v22" fill="none" stroke="#F2B134" stroke-width="3.500" stroke-linecap="round"/><circle cx="156" cy="76" r="5" fill="#F2B134"/>
-<ellipse cx="70" cy="166" rx="18" ry="10" fill="#fff" stroke="#0F2D5E" stroke-width="5"/><ellipse cx="130" cy="166" rx="18" ry="10" fill="#fff" stroke="#0F2D5E" stroke-width="5"/>`;
-
 /* ---------- subjects ---------- */
 export type SubjKey = "EGB275" | "EGB270" | "EGB273" | "BSB105";
 export const SUBJ: Record<SubjKey, { n: string; c: string }> = {

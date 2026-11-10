@@ -3,6 +3,7 @@
    Later, live Claude calls replace `respond`. */
 import { MEET, PEOPLE, SUBJ, SYNC, TODO, type Person, type SubjKey } from "./data";
 import { DAYN } from "./dates";
+import type { Mood } from "./mascot";
 
 /* the demo is pinned to this moment so suggestions never change on the day: Sat 7 Nov 2026, 2:30 pm */
 export const NOW = new Date(2026, 10, 7, 14, 30);
@@ -35,6 +36,7 @@ export type Card =
   | { type: "nosource" };
 
 export type Reply = {
+  mood?: Mood; // overrides the mascot picked by moodOf()
   text: string[];
   list?: string[];
   sources?: Source[];
@@ -42,6 +44,14 @@ export type Reply = {
   card?: Card;
   follow: Follow[];
 };
+
+/* which mascot Buddy wears for a reply: Peely by default */
+export function moodOf(r: Reply): Mood {
+  if (r.mood) return r.mood;
+  if (r.guide || r.card?.type === "scope" || r.card?.type === "nosource") return "hmm";
+  if (r.sources?.length) return "tick";
+  return "peely";
+}
 
 /* ---------- usage history (fictional) ---------- */
 export const USAGE = {
@@ -430,6 +440,7 @@ export function respond(flow: FlowId, text: string, ctx: Ctx): Reply {
       const all = [...TODO].sort((a, b) => a.due.localeCompare(b.due));
       const open = all.filter((t) => !ctx.done.has(t.id)).length;
       return {
+        mood: open ? undefined : "yay",
         text: [open ? "Here is what is due, soonest first. Tick things off as you finish them." : "Nothing is due. Nice work."],
         sources: [{ subj: "EGB273", label: "Synced from Canvas" }],
         card: {

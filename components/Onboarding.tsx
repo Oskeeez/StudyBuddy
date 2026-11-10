@@ -176,7 +176,7 @@ function Sync() {
 
   return (
     <div className="ob sync fade">
-      <Mascot />
+      <Mascot mood={done ? "yay" : "hmm"} />
       <div>
         <h2>{done ? "You are all set, Mia" : "Reading your courses"}</h2>
         <p className="lead">
