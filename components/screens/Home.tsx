@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { MEET, POSTS, SUBJ, TODO, pIndex } from "@/lib/data";
 import { pool, useStore } from "@/lib/store";
 import { SessRow } from "../cards";
@@ -9,7 +8,6 @@ import { Art, Avatar, Icon, Mascot } from "../ui";
 
 export default function Home() {
   const { S, A } = useStore();
-  const [hs, setHs] = useState("");
   const pl = pool(S);
   const top = pl[0];
   const stk = pl.slice(0, 3);
@@ -32,24 +30,6 @@ export default function Home() {
           <Mascot />
         </div>
       </section>
-
-      <form
-        className="search"
-        role="search"
-        onSubmit={(e) => {
-          e.preventDefault();
-          A.homeSearch(hs);
-        }}
-      >
-        <Icon n="search" />
-        <input
-          type="text"
-          value={hs}
-          onChange={(e) => setHs(e.target.value)}
-          placeholder="Search for a subject, group or question..."
-          aria-label="Search"
-        />
-      </form>
 
       <TipCard />
 
@@ -140,23 +120,6 @@ export default function Home() {
           </button>
         </div>
       </div>
-
-      <button
-        className="fc"
-        style={{ position: "relative", overflow: "hidden" }}
-        onClick={() => A.go("buddy")}
-      >
-        <div className="hd" style={{ paddingRight: 110 }}>
-          <div className="t">
-            <h3>Your Personal Study Buddy</h3>
-            <p>Ask anything and get explanations built around your course.</p>
-          </div>
-        </div>
-        <Mascot c="mas" />
-        <span className="go" style={{ position: "absolute", right: 12, top: 14 }}>
-          <Icon n="arrow" c="sm" />
-        </span>
-      </button>
 
       <section>
         <div className="sec-h">

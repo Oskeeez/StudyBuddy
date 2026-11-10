@@ -118,7 +118,7 @@ export default function Buddy({ active }: { active: boolean }) {
   const taRef = useRef<HTMLTextAreaElement>(null);
   const busy = thinking !== null;
 
-  const sugg = useMemo(() => suggest(S.done, S.joined), [S.done, S.joined]);
+  const sugg = useMemo(() => suggest(S.done, S.joined).slice(0, 2), [S.done, S.joined]);
   const soon = TODO.filter((t) => !S.done.has(t.id) && hoursLeft(t.due) > 0 && hoursLeft(t.due) <= 72).sort((a, b) =>
     a.due.localeCompare(b.due),
   );
