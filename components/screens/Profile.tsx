@@ -3,8 +3,7 @@
 import { SUBJ, SUBJ_KEYS } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { PICK_ART } from "@/lib/pickart";
-import { THEMES, useTheme } from "@/lib/theme";
-import { Icon, Mascot } from "../ui";
+import { Mascot } from "../ui";
 
 /* picked by picture, not words; the label stays as the tooltip and screen reader name */
 /* one-word captions under each picture */
@@ -34,7 +33,6 @@ const PRIVACY: ["visible" | "buddy", string, string][] = [
 
 export default function Profile() {
   const { S, A } = useStore();
-  const { theme, setTheme } = useTheme();
   return (
     <div className="fade prof">
       <div className="px" style={{ display: "flex", flexDirection: "column", gap: 20, paddingTop: 14, paddingBottom: 28 }}>
@@ -86,28 +84,7 @@ export default function Profile() {
 
         <section>
           <p className="lab">Settings</p>
-          <div className="card set themes pcard" role="group">
-            <div className="pblock">
-              <p className="sub">Appearance</p>
-            </div>
-            <div role="radiogroup" aria-label="Colour theme">
-              {THEMES.map((t) => (
-                <button key={t.id} className="row" role="radio" aria-checked={theme === t.id} onClick={() => setTheme(t.id)}>
-                  <span className="sw" aria-hidden="true">
-                    {t.swatch.map((c) => (
-                      <i key={c} style={{ background: c }} />
-                    ))}
-                  </span>
-                  <span className="m">
-                    <b>{t.label}</b>
-                    <span>{t.note}</span>
-                  </span>
-                  <span className="ck" aria-hidden="true">
-                    <Icon n="check" c="sm" />
-                  </span>
-                </button>
-              ))}
-            </div>
+          <div className="card set pcard" role="group">
             <div className="pblock">
               <p className="sub">Privacy</p>
             </div>

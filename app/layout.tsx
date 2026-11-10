@@ -15,7 +15,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   colorScheme: "only light",
-  themeColor: "#F1F6FF",
+  themeColor: "#FBF7EE",
 };
 
 export default function RootLayout({
@@ -24,14 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
-        {/* apply the saved theme before first paint so there is no flash */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem("studybuddy-theme");if(t==="opt1"||t==="opt2")document.documentElement.setAttribute("data-theme",t)}catch(e){}`,
-          }}
-        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link

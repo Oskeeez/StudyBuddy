@@ -1,4 +1,5 @@
 import { GRAD, IC, SUBJ, type SubjKey } from "@/lib/data";
+import { PICK_ART } from "@/lib/pickart";
 import { MASCOT, MASCOT_VIEWBOX, type Mood } from "@/lib/mascot";
 
 export function Icon({ n, c = "" }: { n: string; c?: string }) {
@@ -22,6 +23,11 @@ export function Mascot({ c = "", mood = "peely", fit = "full" }: { c?: string; m
       dangerouslySetInnerHTML={{ __html: MASCOT[mood] }}
     />
   );
+}
+
+/* one of the Peely-style illustrations (see lib/pickart.ts) */
+export function Art({ k }: { k: string }) {
+  return <svg viewBox="0 0 80 80" aria-hidden="true" dangerouslySetInnerHTML={{ __html: PICK_ART[k] }} />;
 }
 
 export function Avatar({

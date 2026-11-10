@@ -5,7 +5,7 @@ import { MEET, POSTS, SUBJ, TODO, pIndex } from "@/lib/data";
 import { pool, useStore } from "@/lib/store";
 import { SessRow } from "../cards";
 import TipCard from "../TipCard";
-import { Avatar, Icon, Mascot } from "../ui";
+import { Art, Avatar, Icon, Mascot } from "../ui";
 
 export default function Home() {
   const { S, A } = useStore();
@@ -56,7 +56,7 @@ export default function Home() {
       <button className="fc blue" onClick={() => A.go("discover")}>
         <div className="hd">
           <div className="ic">
-            <Icon n="discover" c="lg" />
+            <Art k="Small groups" />
           </div>
           <div className="t">
             <h3>Find Your People</h3>
@@ -97,7 +97,7 @@ export default function Home() {
           onClick={() => A.go("collaborate")}
         >
           <div className="ic">
-            <Icon n="collab" c="lg" />
+            <Art k="Talking it through" />
           </div>
           <div className="t">
             <h3>Collaborate</h3>
@@ -142,14 +142,11 @@ export default function Home() {
       </div>
 
       <button
-        className="fc mint"
+        className="fc"
         style={{ position: "relative", overflow: "hidden" }}
         onClick={() => A.go("buddy")}
       >
-        <div className="hd" style={{ paddingRight: 90 }}>
-          <div className="ic">
-            <Icon n="spark" c="lg" />
-          </div>
+        <div className="hd" style={{ paddingRight: 110 }}>
           <div className="t">
             <h3>Your Personal Study Buddy</h3>
             <p>Ask anything and get explanations built around your course.</p>
