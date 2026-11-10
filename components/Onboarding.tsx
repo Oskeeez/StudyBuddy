@@ -122,7 +122,7 @@ function Allow({ next, cancel }: { next: () => void; cancel: () => void }) {
             AL
           </span>
           <span>
-            Anusha Lawson
+            Anusha
             <small>Signed in as n1234567</small>
           </span>
         </div>

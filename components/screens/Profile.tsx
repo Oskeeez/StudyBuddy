@@ -7,6 +7,20 @@ import { THEMES, useTheme } from "@/lib/theme";
 import { Icon, Mascot } from "../ui";
 
 /* picked by picture, not words; the label stays as the tooltip and screen reader name */
+/* one-word captions under each picture */
+const SHORT: Record<string, string> = {
+  Visual: "Visual",
+  "Talking it through": "Talking",
+  "Practice problems": "Practice",
+  Reading: "Reading",
+  Mornings: "Mornings",
+  Afternoons: "Afternoons",
+  Evenings: "Evenings",
+  "On campus": "Campus",
+  Online: "Online",
+  "Small groups": "Groups",
+};
+
 const GROUPS: Record<string, string[]> = {
   "How I learn": ["Visual", "Talking it through", "Practice problems", "Reading"],
   "When I study": ["Mornings", "Afternoons", "Evenings"],
@@ -26,7 +40,7 @@ export default function Profile() {
       <div className="px" style={{ display: "flex", flexDirection: "column", gap: 20, paddingTop: 14, paddingBottom: 28 }}>
         <div className="pid">
           <div className="who">
-            <h2>Anusha Lawson</h2>
+            <h2>Anusha</h2>
             <p>Civil Engineering · Year 2</p>
           </div>
           <Mascot />
@@ -61,6 +75,7 @@ export default function Profile() {
                       onClick={() => A.pref(x)}
                     >
                       <svg viewBox="0 0 80 80" aria-hidden="true" dangerouslySetInnerHTML={{ __html: PICK_ART[x] }} />
+                      <span>{SHORT[x]}</span>
                     </button>
                   ))}
                 </div>
