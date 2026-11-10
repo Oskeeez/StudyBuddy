@@ -204,7 +204,6 @@ export default function Home() {
                 ) : (
                   <div className="nudge">
                     <b>
-                      <Icon n="buddy" c="sm" />
                       Suggested next step
                     </b>
                     {x.nudge}

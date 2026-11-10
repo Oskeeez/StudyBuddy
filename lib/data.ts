@@ -446,7 +446,7 @@ export const TIPS: Tip[] = [
   {
     k: "tips",
     h: "Ease into your first meetup",
-    text: "We noticed you have not been to a study session yet. 23 other EGB275 students are going on Friday, and it fits your timetable. Want a few pointers so walking in feels easier?",
+    text: "I noticed you have not been to a study session yet. 23 other EGB275 students are going on Friday, and it fits your timetable. Want a few pointers so walking in feels easier?",
     cta: "Show me pointers",
     who: [],
   },

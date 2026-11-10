@@ -64,7 +64,7 @@ const NAV: [Tab, string, string][] = [
   ["home", "Home", "home"],
   ["discover", "Connect", "discover"],
   ["collaborate", "Collaborate", "collab"],
-  ["buddy", "Buddy", "buddy"],
+  ["buddy", "Buddy", "spark"],
   ["profile", "Profile", "user"],
 ];
 

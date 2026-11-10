@@ -13,9 +13,6 @@ export default function TipCard() {
   return (
     <div className="buddy fade" key={S.tip}>
       <div className="h">
-        <div className="bot">
-          <Icon n="buddy" />
-        </div>
         <b>
           <small>Buddy</small>
           {t.h}
