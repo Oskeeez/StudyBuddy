@@ -38,6 +38,7 @@ export const IC: Record<string, string> = {
   repeat:
     '<path d="M17 3l3 3-3 3"/><path d="M4 11V9a3 3 0 0 1 3-3h13M7 21l-3-3 3-3"/><path d="M20 13v2a3 3 0 0 1-3 3H4"/>',
   cap: '<path d="M2 9l10-5 10 5-10 5Z"/><path d="M6 11.500V16c0 1.500 2.700 3 6 3s6-1.500 6-3v-4.500"/><path d="M22 9v6"/>',
+  camera: '<path d="M4 8h3l1.500-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.500"/>',
 };
 
 /* ---------- fake Canvas sync: what Buddy "reads" from each subject ---------- */

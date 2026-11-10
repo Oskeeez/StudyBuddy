@@ -15,7 +15,7 @@ import { useStore } from "@/lib/store";
 import BuddyCard, { Sources } from "../buddy-cards";
 import { Icon, Mascot } from "../ui";
 
-type UMsg = { id: number; role: "user"; text: string };
+type UMsg = { id: number; role: "user"; text: string; img?: string };
 type BMsg = { id: number; role: "buddy"; reply: Reply };
 type Msg = UMsg | BMsg;
 
@@ -108,6 +108,8 @@ export default function Buddy({ active }: { active: boolean }) {
   const { S } = useStore();
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
+  const [photo, setPhoto] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
   const [thinking, setThinking] = useState<string | null>(null);
   const [scope, setScope] = useState<"All" | SubjKey>("All");
   const nid = useRef(1);
@@ -148,12 +150,13 @@ export default function Buddy({ active }: { active: boolean }) {
 
   const send = useCallback(
     (text: string, flow?: FlowId, scopeOverride?: "All" | SubjKey) => {
-      const t = text.trim();
+      const t = text.trim() || (photo ? "Can you help me with this question?" : "");
       if (!t || thinking !== null) return;
-      const f = flow ?? route(t);
+      const f = flow ?? (photo ? "ladder" : route(t));
       const reply = respond(f, t, { scope: scopeOverride ?? scope, done: S.done, joined: S.joined });
-      setMsgs((m) => [...m, { id: nid.current++, role: "user", text: t }]);
+      setMsgs((m) => [...m, { id: nid.current++, role: "user", text: t, img: photo ?? undefined }]);
       setInput("");
+      setPhoto(null);
       const src = reply.sources?.[0];
       setThinking(src ? `Reading ${src.label}` : "Searching your course files");
       setTimeout(() => {
@@ -161,7 +164,7 @@ export default function Buddy({ active }: { active: boolean }) {
         setThinking(null);
       }, 1100);
     },
-    [scope, S.done, S.joined, thinking],
+    [scope, S.done, S.joined, thinking, photo],
   );
 
   const rescope = (text: string, flow: FlowId) => {
@@ -203,6 +206,7 @@ export default function Buddy({ active }: { active: boolean }) {
             {msgs.map((m) =>
               m.role === "user" ? (
                 <div className="bu fade" key={m.id}>
+                  {m.img && <img src={m.img} alt="Photo you sent" />}
                   {m.text}
                 </div>
               ) : (
@@ -249,6 +253,15 @@ export default function Buddy({ active }: { active: boolean }) {
             </button>
           </div>
         )}
+        {photo && (
+          <div className="bphoto fade">
+            <img src={photo} alt="Photo attached" />
+            <span>Photo attached</span>
+            <button type="button" aria-label="Remove photo" onClick={() => setPhoto(null)}>
+              <Icon n="x" c="sm" />
+            </button>
+          </div>
+        )}
         <form
           className="bform"
           onSubmit={(e) => {
@@ -256,6 +269,21 @@ export default function Buddy({ active }: { active: boolean }) {
             send(input);
           }}
         >
+          <input
+            ref={fileRef}
+            type="file"
+            accept="image/*"
+            capture="environment"
+            hidden
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) setPhoto(URL.createObjectURL(f));
+              e.target.value = "";
+            }}
+          />
+          <button type="button" className="bcam" aria-label="Take or upload a photo of a question" onClick={() => fileRef.current?.click()}>
+            <Icon n="camera" />
+          </button>
           <textarea
             ref={taRef}
             rows={1}
@@ -270,7 +298,7 @@ export default function Buddy({ active }: { active: boolean }) {
             placeholder="Ask about your courses..."
             aria-label="Message Buddy"
           />
-          <button className="bsend" disabled={!input.trim() || busy} aria-label="Send">
+          <button className="bsend" disabled={(!input.trim() && !photo) || busy} aria-label="Send">
             <Icon n="send" c="sm" />
           </button>
         </form>
