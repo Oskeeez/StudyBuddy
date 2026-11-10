@@ -394,6 +394,6 @@ button.opl{display:flex;gap:4px;align-items:center;width:100%;text-align:left;pa
 .themes>.pblock:first-child{border-top:0}
 .themes>.pblock .sub{margin:0}
 .picks{display:flex;gap:10px;flex-wrap:wrap}
-.pick{width:60px;height:56px;border-radius:16px;background:var(--surface);border:1.5px solid var(--line);display:grid;place-items:center;color:var(--muted);transition:background .15s,border-color .15s,color .15s}
-.pick .ico{width:28px;height:28px;stroke-width:1.8}
-.pick[aria-pressed="true"]{background:#FFF1C9;border-color:var(--btn);color:var(--btn)}
+.pick{width:72px;height:72px;border-radius:20px;background:var(--surface);border:1.5px solid var(--line);display:grid;place-items:center;transition:background .15s,border-color .15s,box-shadow .15s}
+.pick svg{width:52px;height:52px;display:block}
+.pick[aria-pressed="true"]{background:#FFF1C9;border-color:var(--btn);box-shadow:0 0 0 1.5px var(--btn)}

@@ -2,27 +2,15 @@
 
 import { SUBJ, SUBJ_KEYS } from "@/lib/data";
 import { useStore } from "@/lib/store";
+import { PICK_ART } from "@/lib/pickart";
 import { THEMES, useTheme } from "@/lib/theme";
 import { Icon, Mascot } from "../ui";
 
+/* picked by picture, not words; the label stays as the tooltip and screen reader name */
 const GROUPS: Record<string, string[]> = {
   "How I learn": ["Visual", "Talking it through", "Practice problems", "Reading"],
   "When I study": ["Mornings", "Afternoons", "Evenings"],
   Format: ["On campus", "Online", "Small groups"],
-};
-
-/* picked by picture, not words; the label stays as the tooltip and screen reader name */
-const PICK_ICON: Record<string, string> = {
-  Visual: "pv_visual",
-  "Talking it through": "pv_talk",
-  "Practice problems": "pv_practice",
-  Reading: "pv_read",
-  Mornings: "pv_morning",
-  Afternoons: "pv_afternoon",
-  Evenings: "pv_night",
-  "On campus": "pv_campus",
-  Online: "pv_online",
-  "Small groups": "pv_groups",
 };
 
 const PRIVACY: ["visible" | "buddy", string, string][] = [
@@ -72,7 +60,7 @@ export default function Profile() {
                       title={x}
                       onClick={() => A.pref(x)}
                     >
-                      <Icon n={PICK_ICON[x]} />
+                      <svg viewBox="0 0 80 80" aria-hidden="true" dangerouslySetInnerHTML={{ __html: PICK_ART[x] }} />
                     </button>
                   ))}
                 </div>

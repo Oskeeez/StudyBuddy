@@ -38,17 +38,6 @@ export const IC: Record<string, string> = {
   repeat:
     '<path d="M17 3l3 3-3 3"/><path d="M4 11V9a3 3 0 0 1 3-3h13M7 21l-3-3 3-3"/><path d="M20 13v2a3 3 0 0 1-3 3H4"/>',
   cap: '<path d="M2 9l10-5 10 5-10 5Z"/><path d="M6 11.500V16c0 1.500 2.700 3 6 3s6-1.500 6-3v-4.500"/><path d="M22 9v6"/>',
-  /* study-preference icons */
-  pv_visual: '<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/>',
-  pv_talk: '<path d="M20 12a8 8 0 0 1-11.6 7.1L3.5 20.5l1.5-4.4A8 8 0 1 1 20 12Z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/>',
-  pv_practice: '<path d="M6 3h9l4 4v14H6Z"/><path d="M15 3v4h4"/><path d="M9 12.5l1.6 1.6 3-3.2"/><path d="M9 17.5h7"/>',
-  pv_read: '<path d="M12 6c-2-1.500-5-2-8-1.500v13c3-.5 6 0 8 1.500 2-1.500 5-2 8-1.500v-13c-3-.5-6 0-8 1.500Z"/><path d="M12 6v13"/>',
-  pv_morning: '<path d="M3 18h18"/><path d="M7 18a5 5 0 0 1 10 0"/><path d="M12 5v3M5.600 9.600l1.800 1.800M18.400 9.600l-1.800 1.800"/>',
-  pv_afternoon: '<circle cx="12" cy="12" r="4"/><path d="M12 2.500V5M12 19v2.500M2.500 12H5M19 12h2.500M5.300 5.300l1.800 1.800M16.900 16.900l1.800 1.800M5.300 18.700l1.800-1.800M16.900 7.100l1.800-1.800"/>',
-  pv_night: '<path d="M20 14.500A8 8 0 0 1 9.500 4a8 8 0 1 0 10.500 10.500Z"/><path d="M17 3.500v3M15.500 5h3"/>',
-  pv_campus: '<path d="M3 9l9-5 9 5"/><path d="M5 9.500V19M9.500 12v7M14.500 12v7M19 9.500V19M3 20h18"/>',
-  pv_online: '<rect x="5" y="5" width="14" height="10" rx="2"/><path d="M3 19h18"/>',
-  pv_groups: '<circle cx="12" cy="8" r="3"/><circle cx="5.500" cy="10" r="2.200"/><circle cx="18.500" cy="10" r="2.200"/><path d="M6.500 19c0-3 2.500-5 5.500-5s5.500 2 5.500 5"/><path d="M2 18c0-2 1.300-3.400 3.500-3.700M22 18c0-2-1.300-3.400-3.500-3.700"/>',
 };
 
 /* ---------- fake Canvas sync: what Buddy "reads" from each subject ---------- */
