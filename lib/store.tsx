@@ -153,7 +153,7 @@ function makeActions(
       go("collaborate", { ctab: "groups" });
     },
     bell() {
-      toast("You have 2 new messages");
+      go("collaborate", { ctab: "messages" });
     },
     todo(id: number) {
       setS((s) => ({ ...s, done: toggle(s.done, id) }));

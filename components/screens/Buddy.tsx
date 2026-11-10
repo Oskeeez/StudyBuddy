@@ -181,7 +181,7 @@ export default function Buddy({ active }: { active: boolean }) {
             <div className="bhello">
               <Mascot />
               <div>
-                <h2>Hi Mia</h2>
+                <h2>Hi Anusha</h2>
                 <p className="bctx">{ctxLine}</p>
               </div>
             </div>

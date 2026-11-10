@@ -119,10 +119,10 @@ function Allow({ next, cancel }: { next: () => void; cancel: () => void }) {
       <div className="lms-card">
         <div className="lms-user">
           <span className="av s" style={{ background: "linear-gradient(135deg,#1F62D6,#13B5C8)" }}>
-            ML
+            AL
           </span>
           <span>
-            Mia Lawson
+            Anusha Lawson
             <small>Signed in as n1234567</small>
           </span>
         </div>
@@ -178,7 +178,7 @@ function Sync() {
     <div className="ob sync fade">
       <Mascot mood={done ? "yay" : "hmm"} />
       <div>
-        <h2>{done ? "You are all set, Mia" : "Reading your courses"}</h2>
+        <h2>{done ? "You are all set, Anusha" : "Reading your courses"}</h2>
         <p className="lead">
           {done
             ? "Buddy now knows your subjects and will answer from your own course material."

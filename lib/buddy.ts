@@ -454,7 +454,7 @@ export function respond(flow: FlowId, text: string, ctx: Ctx): Reply {
     case "hello":
       return {
         text: [
-          "Hi Mia. I can explain things from your course files, quiz you, or help you plan an assignment. I will not do your assessable work for you, but I will get you moving.",
+          "Hi Anusha. I can explain things from your course files, quiz you, or help you plan an assignment. I will not do your assessable work for you, but I will get you moving.",
         ],
         follow: sg,
       };

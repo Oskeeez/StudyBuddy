@@ -36,17 +36,7 @@ function Top() {
     );
   }
 
-  if (S.tab === "home") {
-    return (
-      <header className="top px">
-        <span className="sp" />
-        <button className="ibtn" onClick={A.bell} aria-label="Notifications">
-          <Icon n="bell" />
-          <i className="dot" />
-        </button>
-      </header>
-    );
-  }
+  if (S.tab === "home") return null;
 
   return (
     <header className="top px">
@@ -117,6 +107,7 @@ function Shell() {
   }, [S.tab, S.chat, S.dtab, S.ctab]);
 
   const buddyOn = S.tab === "buddy" && !S.chat;
+  const pinTop = buddyOn || !!S.chat;
   const screens: Record<Tab, React.ReactNode> = {
     home: <Home />,
     discover: <Discover />,
@@ -139,8 +130,9 @@ function Shell() {
   return (
     <div className="stage">
       <div className="shell app">
-        <Top />
+        {pinTop && <Top />}
         <main className="main" ref={mainRef}>
+          {!pinTop && <Top />}
           {S.chat ? <ChatView /> : screens[S.tab]}
           <div className="buddyhost" hidden={!buddyOn}>
             <Buddy active={buddyOn} />

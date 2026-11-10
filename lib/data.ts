@@ -59,11 +59,11 @@ export const SUBJ: Record<SubjKey, { n: string; c: string }> = {
 export const SUBJ_KEYS = Object.keys(SUBJ) as SubjKey[];
 
 export const GRAD = [
-  ["#1F62D6", "#13B5C8"],
-  ["#0E8F8A", "#7BC96F"],
-  ["#D9730D", "#F2B134"],
-  ["#C2417A", "#F08A5D"],
-  ["#3A55C8", "#4FA3F7"],
+  ["#1F62D6", "#1F62D6"],
+  ["#0E8F8A", "#0E8F8A"],
+  ["#D9730D", "#D9730D"],
+  ["#C2417A", "#C2417A"],
+  ["#3A55C8", "#3A55C8"],
 ];
 
 /* ---------- people ---------- */

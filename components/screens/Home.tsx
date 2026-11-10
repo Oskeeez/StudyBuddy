@@ -18,29 +18,18 @@ export default function Home() {
   return (
     <div className="pad px fade">
       <section className="hero">
-        <span className="pill qutp">QUT · Semester 2</span>
-        <h1 className="title" style={{ marginTop: 2 }}>
-          Study
-          <br />
-          Buddy
-        </h1>
-        <svg
-          className="spark"
-          viewBox="0 0 50 40"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="4"
-          strokeLinecap="round"
-          aria-hidden="true"
-        >
-          <path d="M14 30 4 36M26 20 14 12M32 14l10-10" />
-        </svg>
-        <Mascot />
+        <div className="hrow">
+          <span className="pill qutp">QUT · Semester 2</span>
+          <button className="ibtn" onClick={A.bell} aria-label="Notifications">
+            <Icon n="bell" />
+            <i className="dot" />
+          </button>
+        </div>
         <div className="hi">
           <h2>
-            Hey <u>Mia!</u>
+            Hey <u>Anusha!</u>
           </h2>
-          <p>Ready to find your people?</p>
+          <Mascot />
         </div>
       </section>
 
