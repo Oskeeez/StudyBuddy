@@ -73,8 +73,8 @@ function BuddyMessage({
           Buddy
           {r.guide && (
             <span className="gbadge">
-              <Icon n="shield" c="sm" />
-              Guide mode
+              <Icon n="spark" c="sm" />
+              Working it through
             </span>
           )}
         </div>
@@ -204,7 +204,7 @@ export default function Buddy({ active }: { active: boolean }) {
             </div>
             <button className="btry" onClick={() => setInput(SAMPLE_QUESTION)}>
               <Icon n="shield" c="sm" />
-              Paste an assignment question to see guide mode
+              Paste an assignment question to see guided practice
             </button>
           </div>
         ) : (

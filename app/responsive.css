@@ -42,7 +42,6 @@
   .shell.app .main{grid-column:2;grid-row:2}
   .shell.app .main>*{max-width:840px;margin-left:auto;margin-right:auto;width:100%}
   .shell.app .toast{bottom:28px;left:calc(50% + 120px)}
-  .shell.app .alert{left:auto;right:24px;top:20px;width:400px}
   .shell.app .sheet{align-items:center;justify-content:center}
   .shell.app .sheet .panel{width:min(520px,92%);max-height:82%;border-radius:26px}
   .shell.app .sheet .grab{display:none}

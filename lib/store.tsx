@@ -11,7 +11,6 @@ import {
 import {
   PEOPLE,
   POSTS,
-  PRIYA,
   THREADS,
   TIPS,
   TODO,
@@ -23,7 +22,6 @@ import {
 import { D, addDays, dkey, mondayOf, parseK } from "./dates";
 
 export type Tab = "home" | "discover" | "collaborate" | "buddy" | "profile";
-export type AlertKind = "offer" | "mutual" | null;
 
 export const TITLES: Record<string, string> = {
   discover: "Find your people",
@@ -48,8 +46,6 @@ export type State = {
   guide: boolean;
   q: string;
   ms: string;
-  sugg: null | "offer" | "waiting" | "mutual" | "declined";
-  alert: AlertKind;
   conn: boolean;
   rsvp: Set<string>;
   connected: Set<string>;
@@ -80,8 +76,6 @@ const initial = (): State => ({
   guide: false,
   q: "",
   ms: "",
-  sugg: null,
-  alert: null,
   conn: false,
   rsvp: new Set(),
   connected: new Set(),
@@ -108,9 +102,8 @@ function add<T>(set: Set<T>, v: T): Set<T> {
   return n;
 }
 
-/* people shown in the Connect list: Priya appears once both of you said yes */
+/* people shown in the Connect list */
 export const pool = (S: State): Person[] => [
-  ...(S.sugg === "mutual" && !S.conn && !S.passed.has("priya") ? [PRIYA] : []),
   ...PEOPLE.filter((p) => !S.passed.has(p.id) && !S.connected.has(p.id)),
 ];
 
@@ -359,20 +352,6 @@ function makeActions(
     homeSearch(q: string) {
       go("collaborate", { q: q.trim(), ctab: "board", filter: "All" });
     },
-    sYes() {
-      setS((s) => ({ ...s, alert: null, sugg: "waiting" }));
-      toast("Done. They only see you if they say yes too.");
-    },
-    sNo() {
-      setS((s) => ({ ...s, alert: null, sugg: "declined" }));
-      toast("No problem. We will not suggest you.");
-    },
-    sLater() {
-      setS((s) => ({ ...s, alert: null }));
-    },
-    sView() {
-      go("discover", { alert: null, dtab: "people", filter: "All" });
-    },
   };
   return A;
 }
@@ -413,24 +392,6 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     window.addEventListener("hashchange", apply);
     return () => window.removeEventListener("hashchange", apply);
   }, []);
-
-  /* Buddy offers to suggest the profile a moment after you get into the app */
-  useEffect(() => {
-    if (!S.entered) return;
-    const t = setTimeout(() => {
-      setS((s) => (!s.sugg ? { ...s, sugg: "offer", alert: "offer" } : s));
-    }, 2600);
-    return () => clearTimeout(t);
-  }, [S.entered]);
-
-  /* the other student says yes a few seconds after you do */
-  useEffect(() => {
-    if (S.sugg !== "waiting") return;
-    const t = setTimeout(() => {
-      setS((s) => (s.sugg === "waiting" ? { ...s, sugg: "mutual", alert: "mutual" } : s));
-    }, 5000);
-    return () => clearTimeout(t);
-  }, [S.sugg]);
 
   const A = makeActions(S, setS, toast);
   return <StoreCtx.Provider value={{ S, A, toastMsg }}>{children}</StoreCtx.Provider>;

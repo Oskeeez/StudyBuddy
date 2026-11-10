@@ -17,12 +17,20 @@ export type FlowId =
 
 export type Source = { subj: SubjKey; label: string };
 export type Follow = { label: string; flow: FlowId };
-export type Q = { q: string; options: string[]; answer: number; explain: string; source: Source };
+export type Q = {
+  q: string; options: string[]; answer: number; explain: string; source: Source;
+  topic: string; // short name used in the quiz review
+  revise: FlowId; // what to open if the student missed it
+};
+export type TodoItem = { id: number; t: string; s: string; subj: SubjKey; prompt: string; flow: FlowId };
 
 export type Card =
-  | { type: "ladder"; steps: { label: string; body: string }[]; example: { title: string; lines: string[]; note: string } }
+  | { type: "ladder"; steps: { label: string; task: string; nudge: string }[]; example: { title: string; lines: string[]; note: string } }
   | { type: "quiz"; title: string; qs: Q[] }
   | { type: "match"; people: Person[]; note: string }
+  | { type: "checklist"; title: string; items: string[]; finish: string }
+  | { type: "formulas"; title: string; rows: { label: string; formula: string }[]; note: string }
+  | { type: "due"; items: TodoItem[] }
   | { type: "scope"; retry: { text: string; flow: FlowId } }
   | { type: "nosource" };
 
@@ -179,6 +187,8 @@ const QUIZ275: Q[] = [
     answer: 1,
     explain: "Moment-area gets the deflection at a point straight from areas under the M/EI diagram. Double integration gives the whole curve, so it is more work.",
     source: S275("EGB275 · Week 7 slides p.12"),
+    topic: "moment-area vs double integration",
+    revise: "tut7",
   },
   {
     q: "A beam of length L is fixed at both ends with a point load P at midspan. What is the fixed-end moment at each end?",
@@ -186,6 +196,8 @@ const QUIZ275: Q[] = [
     answer: 1,
     explain: "For a central point load each end moment is PL/8. The wL²/12 result is the uniformly distributed load case.",
     source: S275("EGB275 · Week 5 slides p.8"),
+    topic: "fixed-end moments",
+    revise: "fem",
   },
   {
     q: "A propped cantilever is statically indeterminate to what degree?",
@@ -193,6 +205,8 @@ const QUIZ275: Q[] = [
     answer: 1,
     explain: "There is one redundant reaction (the prop), so you need one compatibility equation on top of equilibrium.",
     source: S275("EGB275 · Tutorial 5 worked solution"),
+    topic: "propped cantilevers",
+    revise: "fem",
   },
 ];
 
@@ -203,6 +217,8 @@ const QUIZ270: Q[] = [
     answer: 1,
     explain: "Past the yield point the material no longer returns to its original shape when unloaded.",
     source: S270("EGB270 · Week 3 slides p.6"),
+    topic: "yield point",
+    revise: "yield",
   },
   {
     q: "What happens just after the ultimate tensile strength is reached?",
@@ -210,6 +226,8 @@ const QUIZ270: Q[] = [
     answer: 1,
     explain: "Ultimate strength is the peak of the curve. After it the cross-section starts to neck and the engineering stress falls.",
     source: S270("EGB270 · Week 3 slides p.7"),
+    topic: "ultimate strength and necking",
+    revise: "yield",
   },
   {
     q: "Young's modulus is the slope of which part of the curve?",
@@ -217,6 +235,8 @@ const QUIZ270: Q[] = [
     answer: 0,
     explain: "In the elastic region stress is proportional to strain, and the constant of proportionality is Young's modulus.",
     source: S270("EGB270 · Week 3 slides p.4"),
+    topic: "Young's modulus",
+    revise: "yield",
   },
 ];
 
@@ -257,19 +277,24 @@ export function respond(flow: FlowId, text: string, ctx: Ctx): Reply {
     case "outline":
       return {
         text: [
-          "I will not write the section for you, but the Assessment 2 brief marks it on a few things, so here is a structure that covers them. Answer each in a line or two and you have your five-bullet outline.",
-        ],
-        list: [
-          "Crew size and roles for each construction stage",
-          "Peak labour demand and when it happens",
-          "Skills and licences needed, like crane operators and riggers",
-          "How the workforce ramps up and down against the program",
-          "One risk, such as turbine delivery delays, and how you would cover it",
+          "I will not write the section for you, but the Assessment 2 brief marks it on a few things, so here is a checklist that covers them. Answer each in a line or two and you have your five-bullet outline.",
         ],
         sources: [
           { subj: "EGB273", label: "EGB273 · Assessment 2 brief" },
           { subj: "EGB273", label: "EGB273 · Week 9 slides: Workforce planning" },
         ],
+        card: {
+          type: "checklist",
+          title: "Workforce section outline",
+          items: [
+            "Crew size and roles for each construction stage",
+            "Peak labour demand and when it happens",
+            "Skills and licences needed, like crane operators and riggers",
+            "How the workforce ramps up and down against the program",
+            "One risk, such as turbine delivery delays, and how you would cover it",
+          ],
+          finish: "That is your outline. Paste it in and I will check it against the brief.",
+        },
         follow: [F("Who else is working on Assessment 2?", "match"), F("What is due this week?", "due")],
       };
 
@@ -286,12 +311,17 @@ export function respond(flow: FlowId, text: string, ctx: Ctx): Reply {
     case "fem":
       return {
         text: ["A fixed-end moment is the moment a fixed support develops because the beam cannot rotate there. The ones to know:"],
-        list: [
-          "Point load P at midspan, fixed both ends: PL/8 at each end",
-          "Uniformly distributed load w: wL²/12 at each end",
-          "Propped cantilever: release the prop, then use compatibility of deflection at that point",
-        ],
         sources: [S275("EGB275 · Week 5 slides p.8"), S275("EGB275 · Tutorial 5 worked solution")],
+        card: {
+          type: "formulas",
+          title: "Fixed-end moments",
+          rows: [
+            { label: "Point load P at midspan", formula: "M = PL/8" },
+            { label: "Uniform load w over the span", formula: "M = wL²/12" },
+            { label: "Propped cantilever", formula: "Release prop, then compatibility" },
+          ],
+          note: "Each end gets the same moment for these symmetric cases.",
+        },
         follow: [F("Quiz me on fixed-end moments", "quiz275"), F("What is due this week?", "due")],
       };
 
@@ -308,14 +338,19 @@ export function respond(flow: FlowId, text: string, ctx: Ctx): Reply {
 
     case "case":
       return {
-        text: ["Say your main idea out loud first. If it sounds clear to you, writing it up takes ten minutes. A simple shape for the reflection:"],
-        list: [
-          "The one framework from week 4 you are applying",
-          "Where it fits the case, with one specific example",
-          "Where it does not fit, and what that tells you",
-          "What you would do differently as the manager",
-        ],
+        text: ["Say your main idea out loud first. If it sounds clear to you, writing it up takes ten minutes. Tick these off as you cover them:"],
         sources: [{ subj: "BSB105", label: "BSB105 · Week 4 slides: Frameworks" }, { subj: "BSB105", label: "BSB105 · Case study guide" }],
+        card: {
+          type: "checklist",
+          title: "Case study reflection plan",
+          items: [
+            "The one framework from week 4 you are applying",
+            "Where it fits the case, with one specific example",
+            "Where it does not fit, and what that tells you",
+            "What you would do differently as the manager",
+          ],
+          finish: "That is a full plan. Write it up, then ask me to check it.",
+        },
         follow: [F("Who else is working on the case study?", "match"), F("What is due this week?", "due")],
       };
 
@@ -351,37 +386,34 @@ export function respond(flow: FlowId, text: string, ctx: Ctx): Reply {
 
     case "ladder": {
       const propped = /(propped|cantilever|reaction|prop\b)/.test(text.toLowerCase());
+      const example = {
+        title: "Here is a similar one, already solved: a 4 m cantilever with a 10 kN tip load, EI = 20,000 kN·m²",
+        lines: ["δ = PL³ / 3EI", "δ = 10 × 4³ / (3 × 20,000)", "δ = 0.0107 m = 10.7 mm"],
+        note: propped
+          ? "Same pattern for yours: find the deflection from the load, then find R so the deflection at the prop is zero."
+          : "Follow the same steps on yours, with your own numbers.",
+      };
       return {
         guide: true,
-        text: [
-          "This looks like assessment work, so I have switched to guide mode. I will not give the final answer, but I will get you there.",
-        ],
+        text: ["Good one to practise. Let's work through it together, one step at a time. Have a go at step 1 and tick it off when you are done."],
         sources: propped ? [S275("EGB275 · Week 5 slides p.8"), S275("EGB275 · Tutorial 5 worked solution")] : [S275("EGB275 · Week 7 slides p.12")],
-        card: propped
-          ? {
-              type: "ladder",
-              steps: [
-                { label: "Hint 1", body: "Start with the supports. A propped cantilever has one more reaction than equilibrium can solve. Which reaction would you release to turn it into a simple cantilever?" },
-                { label: "Hint 2", body: "Use compatibility. The deflection at the prop caused by the load has to be cancelled by the deflection caused by the prop reaction R. Write that as one equation with R unknown." },
+        card: {
+          type: "ladder",
+          steps: propped
+            ? [
+                { label: "Sketch it", task: "Draw the beam with its supports and the load. Mark every reaction you can think of, and count how many unknowns you have.", nudge: "You should find one more unknown than equilibrium can solve. That extra reaction is the redundant one." },
+                { label: "Make it determinate", task: "Imagine removing the prop. Which reaction goes, and what does the beam look like now?", nudge: "Without the prop it is a plain cantilever, which you can already solve." },
+                { label: "Write the compatibility equation", task: "The prop holds the beam at zero deflection. Write one equation saying the deflection from the load and the deflection from the prop reaction R add to zero at that point.", nudge: "Look at the Tutorial 5 worked solution. It uses the same compatibility idea, just with a uniform load." },
+                { label: "Solve and sanity check", task: "Solve for R. Then check: is it positive, and is it a sensible fraction of the total load?", nudge: "For a load at midspan, R should be well under the full load." },
+              ]
+            : [
+                { label: "Pull out the facts", task: "Write down what you are given, with units, and what you are asked to find.", nudge: "Circle the quantity the question asks for. Everything you write should lead there." },
+                { label: "Name the method", task: "Which concept from the course connects what you have to what you need?", nudge: "Check the Week 7 slides. The method depends on whether you need one point or the whole curve." },
+                { label: "Work it through", task: "Set up the equation with your own numbers and solve it. Keep the units on every line.", nudge: "If the units do not cancel to what you expect, look at the line before." },
+                { label: "Sanity check", task: "Does the size of your answer make sense? Try a rough estimate to compare.", nudge: "Compare against the worked example below for order of magnitude." },
               ],
-              example: {
-                title: "Worked example on a different problem: a 4 m cantilever with a 10 kN tip load, EI = 20,000 kN·m²",
-                lines: ["δ = PL³ / 3EI", "δ = 10 × 4³ / (3 × 20,000)", "δ = 0.0107 m = 10.7 mm"],
-                note: "Now apply the same pattern to yours: find the deflection from the load, then find R so the deflection at the prop is zero.",
-              },
-            }
-          : {
-              type: "ladder",
-              steps: [
-                { label: "Hint 1", body: "Write down what you are given and what you are asked to find. Then name the concept from the course that connects them." },
-                { label: "Hint 2", body: "Check the Week 7 slides for the method that matches the type of answer you need: a single point, or the whole curve." },
-              ],
-              example: {
-                title: "Worked example on a different problem: a 4 m cantilever with a 10 kN tip load, EI = 20,000 kN·m²",
-                lines: ["δ = PL³ / 3EI", "δ = 10 × 4³ / (3 × 20,000)", "δ = 0.0107 m = 10.7 mm"],
-                note: "Follow the same steps on yours, with your own numbers.",
-              },
-            },
+          example,
+        },
         follow: [],
       };
     }
@@ -389,17 +421,21 @@ export function respond(flow: FlowId, text: string, ctx: Ctx): Reply {
     case "check":
       return {
         text: [
-          "Paste your working and I will go through it line by line. I will point at where it goes wrong and why, and leave the fixing to you.",
+          "Paste what you have so far, even if it is half done. We will go through it line by line, and I will point you to the bit worth a second look.",
         ],
         follow: [],
       };
 
     case "due": {
-      const left = TODO.filter((t) => !ctx.done.has(t.id)).sort((a, b) => a.due.localeCompare(b.due));
+      const all = [...TODO].sort((a, b) => a.due.localeCompare(b.due));
+      const open = all.filter((t) => !ctx.done.has(t.id)).length;
       return {
-        text: [left.length ? "Here is what is due, soonest first." : "Nothing is due. Nice work."],
-        list: left.map((t) => `${t.t} · ${t.s}`),
-        sources: left.length ? [{ subj: "EGB273", label: "Synced from Canvas" }] : undefined,
+        text: [open ? "Here is what is due, soonest first. Tick things off as you finish them." : "Nothing is due. Nice work."],
+        sources: [{ subj: "EGB273", label: "Synced from Canvas" }],
+        card: {
+          type: "due",
+          items: all.map((t) => ({ id: t.id, t: t.t, s: t.s, subj: t.subj, ...TODO_PROMPT[t.id] })),
+        },
         follow: sg,
       };
     }

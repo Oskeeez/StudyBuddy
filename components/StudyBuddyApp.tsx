@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { pById } from "@/lib/data";
-import { StoreProvider, TITLES, useStore, type AlertKind, type Tab } from "@/lib/store";
+import { StoreProvider, TITLES, useStore, type Tab } from "@/lib/store";
 import { PersonSheetCard } from "./cards";
 import Buddy from "./screens/Buddy";
 import ChatView from "./screens/ChatView";
@@ -89,63 +89,6 @@ function Nav() {
   );
 }
 
-/* Buddy's pop-up at the top: keeps its last content while it slides away */
-function AlertPop() {
-  const { S, A } = useStore();
-  const last = useRef<AlertKind>(null);
-  if (S.alert) last.current = S.alert;
-  const kind = last.current;
-
-  return (
-    <div className={`alert ${S.alert ? "show" : ""}`} role="alert">
-      {kind === "offer" && (
-        <>
-          <div className="h">
-            <div className="bot">
-              <Icon n="buddy" />
-            </div>
-            <b>You have a possible study partner</b>
-          </div>
-          <p>
-            A Year 2 civil engineering student in EGB270 and EGB275 who also learns visually. Would you like us
-            to suggest your profile to them? They only see you if they say yes too.
-          </p>
-          <div className="acts">
-            <button className="btn ghost" onClick={A.sNo}>
-              No thanks
-            </button>
-            <button className="btn" onClick={A.sYes}>
-              Yes, suggest me
-            </button>
-          </div>
-        </>
-      )}
-      {kind === "mutual" && (
-        <>
-          <div className="h">
-            <div className="bot">
-              <Icon n="spark" />
-            </div>
-            <b>Priya said yes too</b>
-          </div>
-          <p>
-            You both agreed to be suggested. Have a look at each other’s profiles and decide if you want to
-            connect.
-          </p>
-          <div className="acts">
-            <button className="btn ghost" onClick={A.sLater}>
-              Later
-            </button>
-            <button className="btn" onClick={A.sView}>
-              View profile
-            </button>
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
-
 function Sheet() {
   const { S, A } = useStore();
   const p = S.sheet ? pById(S.sheet) : null;
@@ -204,7 +147,6 @@ function Shell() {
           </div>
         </main>
         <Nav />
-        <AlertPop />
         <Sheet />
         <div className={`toast ${toastMsg.show ? "show" : ""}`} role="status">
           {toastMsg.text}

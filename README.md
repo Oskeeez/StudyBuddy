@@ -17,10 +17,10 @@ npm run build    # production build
 - **Home**: Buddy tips, top match, pinned question, to-do list with next-step nudges, this week's meetups
 - **Connect**: study partner suggestions (with a "both said yes" reveal), weekly meetup calendar, club events
 - **Collaborate**: anonymous Q&A board with similar-question search, direct messages, group chats
-- **Buddy**: placeholder screen. The AI chat mounts into `#buddy-mount` in a later phase
+- **Buddy**: scripted course-aware chat with interactive cards (quiz with review, checklists, formulas, live to-do list, study matches with a "why you two fit" line). Every answer has source chips you can tap to see the lecture content behind it. Pasting an assignment question starts guided practice: steps for the student to try and tick off, a nudge if they are stuck, and a similar worked example
 - **Profile**: learning preferences and privacy toggles
 
-The layout is a phone-shaped shell that fills the screen on mobile and sits centred on desktop. Light and dark mode follow the system setting.
+The layout is a phone-shaped shell that fills the screen on mobile and sits centred on desktop. The theme is light only.
 
 ## Structure
 

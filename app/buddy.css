@@ -50,7 +50,7 @@
 .bcard{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
 .bch{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}
 .bch-t{font-size:12px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
-.qprog{font-size:12px;font-weight:700;color:var(--muted)}
+.qprog{white-space:nowrap;flex:none;font-size:12px;font-weight:700;color:var(--muted)}
 
 /* hint ladder */
 .lrow{display:flex;gap:12px;padding:13px 14px;align-items:flex-start}
@@ -104,3 +104,68 @@
 /* Buddy stays mounted so the chat survives tab switches */
 .buddyhost{height:100%;min-height:0}
 .buddyhost[hidden]{display:none}
+
+/* ---------- source chips with lecture excerpts ---------- */
+.srcw{display:flex;flex-direction:column;gap:8px}
+.src.tap{cursor:pointer;transition:border-color .12s,color .12s}
+.src.tap:hover,.src.tap.on{border-color:var(--blue);color:var(--blue)}
+.src.tap .ico{width:12px;height:12px;transition:transform .15s}
+.src.tap.on .ico{transform:rotate(90deg)}
+.lex{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:6px 14px 14px 6px;padding:10px 13px;font-size:13.5px;line-height:1.45;display:flex;flex-direction:column;gap:5px;color:var(--ink)}
+.lex-h{display:flex;gap:6px;align-items:center;font-size:11.5px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.lex ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px;color:var(--muted)}
+
+/* ---------- progress bar shared by quiz and checklist ---------- */
+.qbar{height:4px;background:var(--line)}
+.qbar i{display:block;height:100%;background:var(--ok);transition:width .3s ease}
+
+/* quiz review */
+.qrev{display:flex;flex-direction:column}
+.qrow{display:flex;gap:10px;align-items:center;padding:10px 14px;border-top:1px solid var(--line);font-size:14.5px}
+.qtopic{flex:1;min-width:0;font-weight:700}
+.qmark{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;flex:none;color:#fff}
+.qmark.right{background:var(--ok)}
+.qmark.miss{background:#E5484D}
+.qmark .ico{width:13px;height:13px}
+.qres{padding-bottom:14px}
+
+/* checklist, due list, formulas */
+.crow{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:12px 14px;font-size:14.5px;line-height:1.4;transition:background .12s}
+.crow+.crow,.bch+.crow,.qbar+.crow{border-top:1px solid var(--line)}
+.crow:hover{background:var(--field)}
+.crow.on>span:last-child{color:var(--muted);text-decoration:line-through}
+.cbox{width:22px;height:22px;border-radius:7px;border:2px solid var(--line);display:grid;place-items:center;flex:none;margin-top:0;color:#fff;background:var(--surface);transition:background .12s,border-color .12s}
+.crow.on .cbox,.drow.done .cbox{background:var(--ok);border-color:var(--ok)}
+.cbox .ico{width:13px;height:13px}
+.drow{display:flex;gap:12px;align-items:center;padding:12px 14px}
+.bch+.drow,.drow+.drow{border-top:1px solid var(--line)}
+.dmain{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;font-size:14.5px;line-height:1.3}
+.dmain>span{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.dd{white-space:nowrap}
+.dmain .sub{font-size:10.5px;padding:2px 7px}
+.drow.done .dmain b{color:var(--muted);text-decoration:line-through}
+.frow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;font-size:14px}
+.bch+.frow,.frow+.frow{border-top:1px solid var(--line)}
+.frow code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;font-weight:700;background:var(--field);border:1px solid var(--line);border-radius:9px;padding:4px 9px;text-align:right}
+.fnote{margin:0;padding:10px 14px 12px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);background:var(--field)}
+
+/* match: why you fit */
+.mrow{flex-direction:column;align-items:stretch;gap:8px}
+.mtop{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.bwhy{display:flex;gap:9px;align-items:flex-start;background:var(--t-mint);border-radius:12px;padding:9px 11px;font-size:13.5px;line-height:1.4}
+.bwhy>.ico{color:var(--ok);flex:none;margin-top:2px}
+.bwhy>div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.bwhy p{margin:0}
+.bwhy-l{font-size:10.5px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--ok)}
+.bwhy ul{margin:2px 0;padding-left:16px;list-style:disc;display:flex;flex-direction:column;gap:2px;color:var(--muted)}
+.bwhy .lbtn{font-size:12.5px;padding:2px 0}
+
+/* guided practice */
+.lrow.now{background:color-mix(in srgb,var(--blue) 5%,var(--surface))}
+button.lnum{cursor:pointer;background:var(--surface)}
+button.lnum.on{background:var(--ok)}
+.lnum.ex{background:var(--t-blue);border-color:var(--t-blue);color:var(--blue)}
+.lnum .ico{width:13px;height:13px}
+.ltip{display:flex;gap:8px;align-items:flex-start;background:var(--t-peach);border-radius:12px;padding:8px 11px;font-size:13.5px}
+.ltip .ico{flex:none;margin-top:2px;color:#B45309;width:16px;height:16px}
+.ltip span{flex:1;min-width:0}
